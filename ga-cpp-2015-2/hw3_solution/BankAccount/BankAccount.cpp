@@ -24,7 +24,8 @@ CBankAccount::~CBankAccount() {
 }
 
 /* Set all values at once */
-CBankAccount::CBankAccount(string bankName, int balances, double interestRate) {
+CBankAccount::CBankAccount(string bankName, int balances, double interestRate)
+    : pastBalances(NULL) {
     CBankAccount::setBankName(bankName);
     CBankAccount::setBalances(balances);
     CBankAccount::setInterestRate(interestRate);
@@ -43,6 +44,7 @@ void CBankAccount::setBalances(int balances) {
 void CBankAccount::setInterestRate(double interestRate) {
     this->interestRate = interestRate;
 }
+
 /*
 void CBankAccount::setPastBalances(int * pastBalances) {
     if(this->pastBalances != NULL)

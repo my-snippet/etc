@@ -11,12 +11,33 @@
 
 /* Built-in libraries */
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 
 
 int _main(int argc, const char * argv[]) {
-    // insert code here...
-    cout << "Hello, World!\n";
+    
+    /* First bank data */
+    string firstAccountBankName = "foo Bank";
+    int firstAccountBalances = 123;
+    double firstAccountInterestRate = 1.23;
+
+    /* Second bank data */
+    string secondBankName = "bar Bank";
+    int secondBankBalances = 321;
+    double secondBankInterestRate = 3.21;
+
+    /* Bank */
+    CBankAccount firstAccount(
+                              firstAccountBankName,
+                              firstAccountBalances,
+                              firstAccountInterestRate);
+    CBankAccount secondAccount(
+                               secondBankName,
+                               secondBankBalances,
+                               secondBankInterestRate);
+    /**/
+    
     return 0;
 }

@@ -23,6 +23,9 @@ private:
     double interestRate;
     int * pastBalances;
     
+    /*  */
+    //const int numOfPastBalances = 12;
+    
 public:
     CBankAccount();
     ~CBankAccount();
@@ -40,6 +43,8 @@ public:
     int getBalances();
     double getInterestRate();
     int * getPastBalances();
+    
+    friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
 };
 
 

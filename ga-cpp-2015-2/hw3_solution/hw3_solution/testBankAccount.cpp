@@ -91,6 +91,73 @@ SCENARIO( "Test set 3 values using just the one method", "[set]" ) {
                 REQUIRE( instance.getBalances() == balances1);
                 REQUIRE( instance.getInterestRate() == interestRate1);
             }
+            AND_THEN( "Also, pastBalances should be set NULL" ) {
+                REQUIRE( instance.getPastBalances() == NULL );
+            }
+        }
+    }
+}
+
+SCENARIO( "instance ", "[set]" ) {
+    GIVEN( "The CBankAccount init using constructor" ) {
+        WHEN( "Set instance variables as a some value" ) {
+            /* Sample data */
+            string bank1 = "bank1";
+            int balances1 = 123;
+            double interestRate1 = 1.17;
+            
+            CBankAccount instance(bank1, balances1, interestRate1);
+            THEN( "Instance variables should be equal to set values")
+            {
+                REQUIRE( instance.getBankName() == bank1);
+                REQUIRE( instance.getBalances() == balances1);
+                REQUIRE( instance.getInterestRate() == interestRate1);
+            }
+            AND_THEN( "Also, pastBalances should be set NULL" ) {
+                REQUIRE( instance.getPastBalances() == NULL );
+            }
+        }
+    }
+}
+
+SCENARIO( "Test CBankAccount operator+", "[set]" ) {
+    GIVEN( "Initialze third bank data" ) {
+        
+        /* First bank data */
+        string firstAccountBankName = "foo Bank";
+        int firstAccountBalances = 123;
+        double firstAccountInterestRate = 1.23;
+        
+        /* Second bank data */
+        string secondAccountName = firstAccountBankName;
+        int secondAccountBalances = 321;
+        double secondAccountInterestRate = 3.21;
+        
+        /* Add two bank data */
+        int sumAccountBalances =
+            firstAccountBalances + secondAccountBalances;
+        double sumBankInterestRate =
+            firstAccountInterestRate + secondAccountInterestRate;
+        
+        /* Bank */
+        CBankAccount firstAccount(
+                                  firstAccountBankName,
+                                  firstAccountBalances,
+                                  firstAccountInterestRate);
+        CBankAccount secondAccount(
+                                   secondAccountName,
+                                   secondAccountBalances,
+                                   secondAccountInterestRate);
+        CBankAccount thirdAccount;
+        
+        WHEN( "Add two instance using operator+" ) {
+            thirdAccount = firstAccount + secondAccount;
+            THEN( "Sum account should be equal to the each sum of the partial value")
+            {
+                REQUIRE( thirdAccount.getBankName() == firstAccountBankName);
+                REQUIRE( thirdAccount.getBalances() == sumAccountBalances);
+                REQUIRE( thirdAccount.getInterestRate() == sumBankInterestRate);
+            }
         }
     }
 }
