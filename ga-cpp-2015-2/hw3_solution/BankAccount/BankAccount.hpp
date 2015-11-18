@@ -43,6 +43,7 @@ public:
     int getnumOfPastBalances();
     
     friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
+    friend ostream& operator<<(ostream& out, CBankAccount& obj);
 };
 
 

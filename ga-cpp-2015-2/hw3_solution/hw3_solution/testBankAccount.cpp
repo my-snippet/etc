@@ -98,7 +98,7 @@ SCENARIO( "Test set 3 values using just the one method", "[set]" ) {
     }
 }
 
-SCENARIO( "instance ", "[set]" ) {
+SCENARIO( "instance ", "[constructor]" ) {
     GIVEN( "The CBankAccount init using constructor" ) {
         WHEN( "Set instance variables as a some value" ) {
             /* Sample data */
@@ -120,7 +120,7 @@ SCENARIO( "instance ", "[set]" ) {
     }
 }
 
-SCENARIO( "Test CBankAccount operator+", "[set]" ) {
+SCENARIO( "Test CBankAccount operator+", "[operator]" ) {
     GIVEN( "Initialze third bank data" ) {
         
         /* First bank data */
@@ -177,11 +177,33 @@ SCENARIO( "Test setPastBalances", "[set]" ) {
             pastBalances = instance.getPastBalances();
             THEN( "instance's past balances should be equal to samplePastBalances")
             {
-                /* It's needed to refactor code, Use function (not, Hard coding) */
-                for(int i ; i < instance.getnumOfPastBalances() ; i++) {
+                /* It's needed to refactor code, Use function (No Hard coding) */
+                for(int i=0 ; i < instance.getnumOfPastBalances() ; i++) {
                     REQUIRE( pastBalances[i] == samplePastBalances[i] );
                 }
             }
         }
     }
 }
+
+/* operator<< have some problems ( catch? or implementation? ) */
+/*
+SCENARIO( "Test print PastBalances using operator<<", "[set]" ) {
+    GIVEN( "Apply sample past balances to instance" ) {
+        CBankAccount instance;
+        
+        int * samplePastBalances = new int [instance.getnumOfPastBalances() + 1];
+        for(int i ; i < instance.getnumOfPastBalances() ; i++) {
+            samplePastBalances[i] = i;
+        }
+        instance.setPastBalances(samplePastBalances);
+        
+        WHEN( "Apply past balances to instance" ) {
+            cout << instance << endl;
+            THEN( "instance's past balances should be equal to samplePastBalances")
+            {
+            }
+        }
+    }
+}
+*/

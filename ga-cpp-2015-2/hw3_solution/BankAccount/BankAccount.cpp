@@ -58,11 +58,6 @@ void CBankAccount::setPastBalances(int * pastBalances) {
            pastBalances,
            this->getnumOfPastBalances() ,
            this->pastBalances);
-    /*
-    assert(
-           sizeof(this->pastBalances) * sizeof(*this->pastBalances) ==
-           this->getnumOfPastBalances());
-     */
 }
 
 /* get methods */
