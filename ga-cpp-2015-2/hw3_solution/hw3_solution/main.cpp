@@ -6,19 +6,17 @@
 //  Copyright © 2015 wikibootup. All rights reserved.
 //
 
+/* Project libraries */
+#include "BankAccount.hpp"
 
-#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
-#include "catch.hpp"
-
-
-/*
+/* Built-in libraries */
 #include <iostream>
 
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+
+int _main(int argc, const char * argv[]) {
     // insert code here...
     cout << "Hello, World!\n";
     return 0;
 }
-*/

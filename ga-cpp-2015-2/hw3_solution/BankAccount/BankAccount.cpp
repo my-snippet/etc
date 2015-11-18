@@ -10,6 +10,7 @@
 
 /* Built-in libraries */
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 
@@ -22,7 +23,60 @@ CBankAccount::~CBankAccount() {
 
 }
 
-int * CBankAccount::getPastBalances()
-{
+/* Set all values at once */
+CBankAccount::CBankAccount(string bankName, int balances, double interestRate) {
+    CBankAccount::setBankName(bankName);
+    CBankAccount::setBalances(balances);
+    CBankAccount::setInterestRate(interestRate);
+}
+
+
+/* set methods */
+void CBankAccount::setBankName(string bankName) {
+    this->bankName = bankName;
+}
+
+void CBankAccount::setBalances(int balances) {
+    this->balances = balances;
+}
+
+void CBankAccount::setInterestRate(double interestRate) {
+    this->interestRate = interestRate;
+}
+/*
+void CBankAccount::setPastBalances(int * pastBalances) {
+    if(this->pastBalances != NULL)
+    {
+        delete this->pastBalances;
+    }
+    
+    this->pastBalances = new int[sizeof(pastBalances) + 1];
+    assert(this->pastBalances != NULL);
+
+
+    copy_n(
+           pastBalances,
+           //4,
+           sizeof(pastBalances),
+           this->pastBalances);
+
+   // assert(sizeof(this->pastBalances) == sizeof(pastBalances));
+}
+*/
+
+/* get methods */
+string CBankAccount::getBankName() {
+    return this->bankName;
+}
+
+int CBankAccount::getBalances() {
+    return this->balances;
+}
+
+double CBankAccount::getInterestRate() {
+    return this->interestRate;
+}
+
+int * CBankAccount::getPastBalances() {
     return this->pastBalances;
 }

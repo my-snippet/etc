@@ -27,6 +27,18 @@ public:
     CBankAccount();
     ~CBankAccount();
     
+    CBankAccount(string bankName, int balances, double interestRate);
+    
+    /* set methods */
+    void setBankName(string bankName);
+    void setBalances(int balances);
+    void setInterestRate(double interestRate);
+    void setPastBalances(int *pastBalances);
+    
+    /* get methods */
+    string getBankName();
+    int getBalances();
+    double getInterestRate();
     int * getPastBalances();
 };
 

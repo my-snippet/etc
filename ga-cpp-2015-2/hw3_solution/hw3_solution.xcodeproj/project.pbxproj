@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D94562E31BFC81ED000013D1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94562E21BFC81ED000013D1 /* main.cpp */; };
+		D945634C1BFC9D72000013D1 /* testBankAccount.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D945634B1BFC9D72000013D1 /* testBankAccount.cpp */; };
+		D94563531BFC9E46000013D1 /* BankAccount.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94563511BFC9E46000013D1 /* BankAccount.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,6 +119,9 @@
 		D94563471BFC8325000013D1 /* catch_reporter_junit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch_reporter_junit.hpp; sourceTree = "<group>"; };
 		D94563481BFC8325000013D1 /* catch_reporter_teamcity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch_reporter_teamcity.hpp; sourceTree = "<group>"; };
 		D94563491BFC8325000013D1 /* catch_reporter_xml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch_reporter_xml.hpp; sourceTree = "<group>"; };
+		D945634B1BFC9D72000013D1 /* testBankAccount.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testBankAccount.cpp; sourceTree = "<group>"; };
+		D94563511BFC9E46000013D1 /* BankAccount.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BankAccount.cpp; path = BankAccount/BankAccount.cpp; sourceTree = "<group>"; };
+		D94563521BFC9E46000013D1 /* BankAccount.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BankAccount.hpp; path = BankAccount/BankAccount.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +140,8 @@
 			children = (
 				D94562E91BFC830D000013D1 /* catch */,
 				D94562E11BFC81ED000013D1 /* hw3_solution */,
+				D94563541BFC9E4F000013D1 /* BankAccount */,
+				D945634A1BFC9D22000013D1 /* tests */,
 				D94562E01BFC81ED000013D1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -286,6 +293,24 @@
 			path = reporters;
 			sourceTree = "<group>";
 		};
+		D945634A1BFC9D22000013D1 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				D945634B1BFC9D72000013D1 /* testBankAccount.cpp */,
+			);
+			name = tests;
+			path = hw3_solution;
+			sourceTree = "<group>";
+		};
+		D94563541BFC9E4F000013D1 /* BankAccount */ = {
+			isa = PBXGroup;
+			children = (
+				D94563511BFC9E46000013D1 /* BankAccount.cpp */,
+				D94563521BFC9E46000013D1 /* BankAccount.hpp */,
+			);
+			name = BankAccount;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,6 +368,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D94562E31BFC81ED000013D1 /* main.cpp in Sources */,
+				D94563531BFC9E46000013D1 /* BankAccount.cpp in Sources */,
+				D945634C1BFC9D72000013D1 /* testBankAccount.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +488,7 @@
 				D94562E81BFC81ED000013D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
