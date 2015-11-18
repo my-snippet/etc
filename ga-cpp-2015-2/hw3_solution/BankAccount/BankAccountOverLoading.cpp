@@ -11,14 +11,13 @@
 /* Built-in libraries */
 #include <iostream>
 #include <cassert>
-#include <string>
 
 using namespace std;
 
 CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs) {
     
     /* Both bank name should be equal */
-    assert(lhs.getBankName().compare(rhs.getBankName()) == 0);
+    assert(lhs.getBankName() == rhs.getBankName());
     
     CBankAccount sumAccount(
                             lhs.getBankName(),
