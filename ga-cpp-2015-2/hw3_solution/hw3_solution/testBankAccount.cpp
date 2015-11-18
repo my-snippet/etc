@@ -161,3 +161,27 @@ SCENARIO( "Test CBankAccount operator+", "[set]" ) {
         }
     }
 }
+
+SCENARIO( "Test setPastBalances", "[set]" ) {
+    GIVEN( "Sample past balances exist" ) {
+        CBankAccount instance;
+        
+        int * samplePastBalances = new int [instance.getnumOfPastBalances() + 1];
+        for(int i ; i < instance.getnumOfPastBalances() ; i++) {
+            samplePastBalances[i] = i;
+        }
+        
+        WHEN( "Apply past balances to instance" ) {
+            instance.setPastBalances(samplePastBalances);
+            int * pastBalances = new int [instance.getnumOfPastBalances() + 1];
+            pastBalances = instance.getPastBalances();
+            THEN( "instance's past balances should be equal to samplePastBalances")
+            {
+                /* It's needed to refactor code, Use function (not, Hard coding) */
+                for(int i ; i < instance.getnumOfPastBalances() ; i++) {
+                    REQUIRE( pastBalances[i] == samplePastBalances[i] );
+                }
+            }
+        }
+    }
+}

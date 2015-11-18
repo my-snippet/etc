@@ -45,26 +45,25 @@ void CBankAccount::setInterestRate(double interestRate) {
     this->interestRate = interestRate;
 }
 
-/*
 void CBankAccount::setPastBalances(int * pastBalances) {
     if(this->pastBalances != NULL)
     {
         delete this->pastBalances;
     }
     
-    this->pastBalances = new int[sizeof(pastBalances) + 1];
+    this->pastBalances = new int[this->getnumOfPastBalances() + 1];
     assert(this->pastBalances != NULL);
-
-
+    
     copy_n(
            pastBalances,
-           //4,
-           sizeof(pastBalances),
+           this->getnumOfPastBalances() ,
            this->pastBalances);
-
-   // assert(sizeof(this->pastBalances) == sizeof(pastBalances));
+    /*
+    assert(
+           sizeof(this->pastBalances) * sizeof(*this->pastBalances) ==
+           this->getnumOfPastBalances());
+     */
 }
-*/
 
 /* get methods */
 string CBankAccount::getBankName() {
@@ -81,4 +80,9 @@ double CBankAccount::getInterestRate() {
 
 int * CBankAccount::getPastBalances() {
     return this->pastBalances;
+}
+
+int CBankAccount::getnumOfPastBalances() {
+    /* Fixed numbers of pastBalances */
+    return 12;
 }

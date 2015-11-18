@@ -21,10 +21,7 @@ private:
     string bankName;
     int balances;
     double interestRate;
-    int * pastBalances;
-    
-    /*  */
-    //const int numOfPastBalances = 12;
+    int * pastBalances;    
     
 public:
     CBankAccount();
@@ -43,6 +40,7 @@ public:
     int getBalances();
     double getInterestRate();
     int * getPastBalances();
+    int getnumOfPastBalances();
     
     friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
 };
