@@ -16,7 +16,11 @@
 using namespace std;
 
 
-int _main(int argc, const char * argv[]) {
+int _main() {
+    /*  Notice :
+        This function does not work in the normal way.
+        It is called when unit testing.
+    */
     
     /* First bank data */
     string firstAccountBankName = "foo Bank";
