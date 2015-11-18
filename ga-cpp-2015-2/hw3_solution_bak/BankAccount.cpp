@@ -8,5 +8,7 @@
 using namespace std;
 
 
-CBankAccount::CBankAccount
-    : pastBalances(NULL);
+CBankAccount::CBankAccount() {
+    pastBalances = NULL;
+}
+//    : pastBalances(NULL);

@@ -1,20 +1,16 @@
-#include <string>
+/* Built-in libraries */
 #include <iostream>
+
+/* Project libraries */
+#include "BankAccount.h"
+
+
 using namespace std;
 
-int _main(int argc, char*argv[])
+
+int _main(int argc, char * argv[])
 {
-    string input;
-
-    if(1 < argc) {
-        input = argv[1];
-    }
-    else {
-        cin >> input;
-    }
-
-    cout << input << endl;
-
+    CBankAccount instance;
 
     return 0;
 }

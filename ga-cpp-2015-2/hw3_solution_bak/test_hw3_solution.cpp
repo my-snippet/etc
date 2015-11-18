@@ -27,6 +27,20 @@ SCENARIO( "Test sample (array object test example)", "[array]" ) {
     }
 }
 
+SCENARIO( "CBankAccount constructor makes pastBalances null", "[CBankAccount]" ) {
+    GIVEN( "CBankAccount instance" ) {
+       // CBankAccount instance;
+
+        WHEN( "Let it be" ) {
+            THEN( "pastBalances should be null")
+            {
+                REQUIRE( true );//instance.pastBalances == "abc" );
+            }
+        }
+    }
+}
+
+
 /*
 SCENARIO( "Vector resizing affects size and capacity", "[vector][bdd][size][capacity]" ) {
     GIVEN( "an empty vector" ) {

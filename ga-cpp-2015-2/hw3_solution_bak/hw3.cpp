@@ -1,9 +1,8 @@
- /* If use visual studio? then just */
-//#pragma once  
-/* else */
-#ifndef BankAccount_H
-#define BankAccount_H
-#endif
+/* Built-in libraries */
+#include <iostream>
+
+/* Project libraries */
+//#include "BankAccount.h"
 
 /* Built-in libraries */
 #include <iostream>
@@ -23,3 +22,15 @@ public:
     CBankAccount();
     ~CBankAccount();
 };
+
+
+CBankAccount::CBankAccount() {
+    pastBalances = NULL;
+}
+
+int main()
+{
+    CBankAccount instance;
+
+    return 0;
+}
