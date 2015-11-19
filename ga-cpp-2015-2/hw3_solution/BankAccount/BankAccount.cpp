@@ -12,8 +12,10 @@
 #include <iostream>
 #include <cassert>
 #include<cmath>
+#include<string>
 
 using namespace std;
+//using namespace customNameSpace;
 
 
 CBankAccount::CBankAccount()
@@ -65,10 +67,10 @@ void CBankAccount::setPastBalances(int * pastBalances) {
            this->pastBalances);
 }
 
-void setBankNameFromUserInput(CBankAccount instance) {
+void CBankAccount::setBankNameFromUserInput() {
     string bankNameUserInput;
-    cin >> bankNameUserInput;
-    instance.setBankName(bankNameUserInput);
+	getline(cin, bankNameUserInput);
+    this->setBankName(bankNameUserInput);
 }
 
 

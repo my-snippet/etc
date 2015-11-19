@@ -18,6 +18,7 @@
 #include <string>
 
 using namespace std;
+//using namespace customNameSpace;
 
 
 SCENARIO( "Test sample (array object test example)", "[array]" ) {
@@ -327,7 +328,7 @@ SCENARIO( "Test string replace using class methods", "[string], [method]" ) {
     }
 }
 
-/* This has some problem, maybe cin causes a crash with catch */
+/* This test requires user input, therefore should be skipped except for it's needed */
 /*
 SCENARIO( "Set bank name from user input", "[user input]" ) {
     GIVEN( "expected Bank Name and CBankAccount instance exists" ) {
@@ -337,7 +338,7 @@ SCENARIO( "Set bank name from user input", "[user input]" ) {
         CBankAccount instance;
         
         WHEN( "Call setBankNameFromUserInput" ) {
-            instance.setBankNameFromUserInput(instance);
+            instance.setBankNameFromUserInput();
             
             THEN( "Return value should be equal to the expectedBankName")
             {
@@ -428,4 +429,3 @@ SCENARIO( "Test compound interest", "[compound interest]" ) {
         }
     }
 }
-
