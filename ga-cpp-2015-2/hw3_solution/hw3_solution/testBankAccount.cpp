@@ -412,12 +412,19 @@ SCENARIO( "Test compound interest", "[compound interest]" ) {
 
                 AND_THEN( "The Deallocated variable value should be deleted" )
                 {
+                    /* This test method is indirect, more exact test, 
+                     it should be used a memory allocation testing library */
                     
+                    for(int row = 0 ; row < forAfterYears ;row++) {
+                        for(int col = 0 ; col < numOfAccounts ; col++) {
+                            REQUIRE(
+                                    compoundValueBundle[row][col] !=
+                                    accountsBundle[col].getBalances() *
+                                    pow(1 + accountsBundle[col].getInterestRate(), row) );
+                        }
+                    }
                 }
-                
             }
-
-            
         }
     }
 }
