@@ -414,8 +414,12 @@ SCENARIO( "Test compound interest", "[compound interest]" ) {
 
                 AND_THEN( "The Deallocated variable value should be deleted" )
                 {
-                    /* This test method is indirect, more exact test, 
-                     it should be used a memory allocation testing library */
+                    /*
+                     This test method is indirect, more exact test,
+                     it should be used a memory allocation testing library. 
+                     + If test is implemented Too fast, all the deallocation may not process yet.
+                     Or otehr factors may exist, more test about this problem needed.
+                     */
                     
                     for(int row = 0 ; row < forAfterYears ;row++) {
                         for(int col = 0 ; col < numOfAccounts ; col++) {

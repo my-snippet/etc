@@ -17,7 +17,7 @@ using namespace std;
 /* 
  Namespace for friend function,
  reference : http://stackoverflow.com/questions/10405312/c-ostream-friends-and-namespaces
- But no memorize : Just learn the sense. 
+ But no memorize : Just learn the sense.
  */
 namespace customNameSpace {
 
