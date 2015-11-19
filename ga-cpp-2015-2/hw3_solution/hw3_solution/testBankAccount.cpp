@@ -18,7 +18,7 @@
 #include <string>
 
 using namespace std;
-//using namespace customNameSpace;
+using namespace customNameSpace;
 
 
 SCENARIO( "Test sample (array object test example)", "[array]" ) {
@@ -175,7 +175,7 @@ SCENARIO( "Test setPastBalances", "[set]" ) {
         
         WHEN( "Apply past balances to instance" ) {
             instance.setPastBalances(samplePastBalances);
-            const int * pastBalances = new int [instance.numOfPastBalances + 1];
+            int * pastBalances = new int [instance.numOfPastBalances + 1];
             pastBalances = instance.getPastBalances();
             THEN( "instance's past balances should be equal to samplePastBalances")
             {

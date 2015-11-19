@@ -15,7 +15,7 @@
 #include<string>
 
 using namespace std;
-//using namespace customNameSpace;
+using namespace customNameSpace;
 
 
 CBankAccount::CBankAccount()
@@ -75,19 +75,19 @@ void CBankAccount::setBankNameFromUserInput() {
 
 
 /* Get methods */
-const string CBankAccount::getBankName() const {
+string CBankAccount::getBankName() const {
     return this->bankName;
 }
 
-const int CBankAccount::getBalances() const {
+int CBankAccount::getBalances() const {
     return this->balances;
 }
 
-const double CBankAccount::getInterestRate() const {
+double CBankAccount::getInterestRate() const {
     return this->interestRate;
 }
 
-const int * CBankAccount::getPastBalances() const {
+int * CBankAccount::getPastBalances() const {
     return this->pastBalances;
 }
 

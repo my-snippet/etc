@@ -14,7 +14,7 @@
 #include <cassert>
 
 using namespace std;
-//using namespace customNameSpace;
+using namespace customNameSpace;
 
 
 int _main() {
