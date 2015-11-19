@@ -17,12 +17,12 @@ using namespace std;
 
 CBankAccount operator+(const CBankAccount& lhs, const CBankAccount& rhs) {
     /* Both bank name should be equal */
-    assert(lhs.bankName == rhs.bankName);
-    
+    assert(lhs.getBankName() == rhs.getBankName());
+
     CBankAccount sumAccount(
-                            lhs.bankName,
-                            lhs.balances + rhs.balances,
-                            lhs.interestRate + rhs.interestRate);
+                            lhs.getBankName(),
+                            lhs.getBalances() + rhs.getBalances(),
+                            lhs.getInterestRate() + rhs.interestRate);
     
     return sumAccount;
 }
@@ -32,12 +32,12 @@ ostream& operator<<(ostream& out, const CBankAccount& obj) {
      ostream cascading is not allowed to use string type
      indirect solution about this, copy it to char * variable
      */
-    char *copyBankName = new char[obj.bankName.length() + 1];
+    char *copyBankName = new char[obj.getBankName().length() + 1];
     strcpy(copyBankName, obj.bankName.c_str());
     
     out <<"Bank name :" << copyBankName << "\n";
-    out << "Balances :" << obj.balances << "\n";
-    out << "InterestRate :" << obj.interestRate << "\n";
+    out << "Balances :" << obj.getBalances() << "\n";
+    out << "InterestRate :" << obj.getInterestRate() << "\n";
     
     int * pasBalances = obj.pastBalances;
     for (int i = 0; i < obj.numOfPastBalances; i++) {

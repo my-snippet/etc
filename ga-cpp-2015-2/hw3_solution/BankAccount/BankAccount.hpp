@@ -42,10 +42,10 @@ using namespace std;
         void setBankNameFromUserInput();
 
         /* Get methods */
-        const string getBankName();
-        const int getBalances();
-        const double getInterestRate();
-        const int * getPastBalances();
+        const string getBankName() const;
+        const int getBalances() const;
+        const double getInterestRate() const;
+        const int * getPastBalances() const;
         
         /* Fixed numbers of pastBalances */
         const int numOfPastBalances = 12;
