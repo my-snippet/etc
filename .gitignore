@@ -5,6 +5,19 @@
 *.out
 *.gch
 
+# visual c/c++
+**/Debug
+*.sdf
+*.pdb
+*.ilk
+*.exe
+*.obj
+**/_hw3_solution.tlog
+*.opensdf
+*.suo
+*.vcxproj
+*.vcxproj.*
+*.idb
 
 # Xcode
 #
