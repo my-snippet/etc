@@ -31,7 +31,7 @@ CBankAccount::CBankAccount(string bankName, int balances, double interestRate)
     CBankAccount::setInterestRate(interestRate);
 }
 
-/* set methods */
+/* Set methods */
 void CBankAccount::setBankName(string bankName) {
     this->bankName = bankName;
 }
@@ -59,7 +59,14 @@ void CBankAccount::setPastBalances(int * pastBalances) {
            this->pastBalances);
 }
 
-/* get methods */
+void setBankNameFromUserInput(CBankAccount instance) {
+    string bankNameUserInput;
+    cin >> bankNameUserInput;
+    instance.setBankName(bankNameUserInput);
+}
+
+
+/* Get methods */
 string CBankAccount::getBankName() {
     return this->bankName;
 }

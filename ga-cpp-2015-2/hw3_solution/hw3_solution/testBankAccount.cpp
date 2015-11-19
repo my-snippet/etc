@@ -326,3 +326,24 @@ SCENARIO( "Test string replace using class methods", "[string], [method]" ) {
         }
     }
 }
+
+/* This has some problem, maybe cin causes a crash with catch */
+/*
+SCENARIO( "Set bank name from user input", "[user input]" ) {
+    GIVEN( "expected Bank Name and CBankAccount instance exists" ) {
+        string expectedBankName = "bank";
+        string inputBankName;
+        
+        CBankAccount instance;
+        
+        WHEN( "Call setBankNameFromUserInput" ) {
+            instance.setBankNameFromUserInput(instance);
+            
+            THEN( "Return value should be equal to the expectedBankName")
+            {
+                REQUIRE( instance.getBankName() == expectedBankName );
+            }
+        }
+    }
+}
+*/

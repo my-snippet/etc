@@ -27,15 +27,19 @@ public:
     CBankAccount();
     ~CBankAccount();
     
+    /* Set all values at once */
     CBankAccount(string bankName, int balances, double interestRate);
     
-    /* set methods */
+    /* Set methods */
     void setBankName(string bankName);
     void setBalances(int balances);
     void setInterestRate(double interestRate);
     void setPastBalances(int *pastBalances);
     
-    /* get methods */
+    /* Set bank name from user input */
+    void setBankNameFromUserInput(CBankAccount instance);
+
+    /* Get methods */
     string getBankName();
     int getBalances();
     double getInterestRate();

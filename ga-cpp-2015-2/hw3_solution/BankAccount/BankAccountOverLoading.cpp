@@ -27,7 +27,6 @@ CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs) {
     return sumAccount;
 }
 
-
 ostream& operator<<(ostream& out, CBankAccount obj) {
     out << "Bank name :" << obj.getBankName() << "\n";
     out << "Balances :" << obj.getBalances() << "\n";
