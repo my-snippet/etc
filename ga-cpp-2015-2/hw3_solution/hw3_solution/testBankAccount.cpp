@@ -189,9 +189,9 @@ SCENARIO( "Test setPastBalances", "[set]" ) {
 }
 
 /* operator<< has some problems ( catch? or implementation? ) */
-/*
+
 SCENARIO( "Test print PastBalances using operator<<", "[set]" ) {
-    GIVEN( "Apply sample past balances to instance" ) {
+    GIVEN( "Set sample past balances to instance" ) {
         CBankAccount instance;
         
         int * samplePastBalances = new int [instance.numOfPastBalances + 1];
@@ -200,15 +200,16 @@ SCENARIO( "Test print PastBalances using operator<<", "[set]" ) {
         }
         instance.setPastBalances(samplePastBalances);
         
-        WHEN( "Apply past balances to instance" ) {
-            cout << instance << endl;
-            THEN( "instance's past balances should be equal to samplePastBalances")
+        WHEN ("")
+        {
+            THEN( "Print using << should be implemented")
             {
+                cout << instance << endl;
             }
         }
     }
 }
-*/
+
 
 SCENARIO( "Test CBankAccount operator=", "[operator]" ) {
     GIVEN( "1. Initialze one bank data, 2. Set sample past balances to originalAccount" ) {
@@ -328,7 +329,7 @@ SCENARIO( "Test string replace using class methods", "[string], [method]" ) {
     }
 }
 
-/* This test requires user input, therefore should be skipped except for it's needed */
+/* This test requires user input, therefore should be skipped except when it's needed */
 /*
 SCENARIO( "Set bank name from user input", "[user input]" ) {
     GIVEN( "expected Bank Name and CBankAccount instance exists" ) {

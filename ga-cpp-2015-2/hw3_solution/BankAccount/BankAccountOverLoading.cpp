@@ -28,13 +28,16 @@ CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs) {
     return sumAccount;
 }
 
-ostream& operator<<(ostream& out, CBankAccount obj) {
+ostream& operator<<(ostream& out, CBankAccount& obj) {
     out << "Bank name :" << obj.getBankName() << "\n";
     out << "Balances :" << obj.getBalances() << "\n";
     out << "InterestRate :" << obj.getInterestRate() << "\n";
-    for(int i=0 ; i < obj.numOfPastBalances ; i++) {
-        out << "PastBalanced #" << i << " : " << obj.getPastBalances() << "\n";
+    
+    int * pasBalances = obj.getPastBalances();
+    for(int i = 0 ; i < obj.numOfPastBalances ; i++) {
+        out << "PastBalanced #" << i << " : " << pasBalances[i] << "\n";
     }
+    
     return out;
 }
 
