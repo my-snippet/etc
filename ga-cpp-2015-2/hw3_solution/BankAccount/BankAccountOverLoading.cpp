@@ -16,7 +16,6 @@ using namespace std;
 //using namespace customNameSpace;
 
 CBankAccount operator+(const CBankAccount& lhs, const CBankAccount& rhs) {
-    
     /* Both bank name should be equal */
     assert(lhs.bankName == rhs.bankName);
     
@@ -29,11 +28,10 @@ CBankAccount operator+(const CBankAccount& lhs, const CBankAccount& rhs) {
 }
 
 ostream& operator<<(ostream& out, const CBankAccount& obj) {
-
     out << "Bank name :" << obj.bankName << "\n";
     out << "Balances :" << obj.balances << "\n";
     out << "InterestRate :" << obj.interestRate << "\n";
-    
+
     int * pasBalances = obj.pastBalances;
     for(int i = 0 ; i < obj.numOfPastBalances ; i++) {
         out << "PastBalanced #" << i << " : " << pasBalances[i] << "\n";
