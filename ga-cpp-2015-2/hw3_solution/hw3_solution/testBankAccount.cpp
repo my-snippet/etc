@@ -299,7 +299,6 @@ SCENARIO( "Test string replace using class methods", "[string], [method]" ) {
         string sampleSentence =
         "Welcome to Bank of America, the nation's leading financial institution and home for all of your personal financial needs";
 
-        
         CBankAccount instance;
         
         WHEN(
@@ -310,35 +309,20 @@ SCENARIO( "Test string replace using class methods", "[string], [method]" ) {
             
             tuple<size_t, size_t> bankNamePos = instance.FindBankInSentence(sampleSentence);
             
-            /*
-            size_t origninalBankNameLength = (
-                                              sampleSentence.substr(bankNameStartPos)
-                                              ).find_last_of(",") - 1;
-            size_t bankNameEndPos = bankNameStartPos + origninalBankNameLength;
-            
-            
-            string modifiedSampleSentence = sampleSentence;
-            modifiedSampleSentence =
-            modifiedSampleSentence.erase(
-                                         bankNameStartPos,
-                                         bankNameEndPos).insert(
-                                                                bankNameStartPos,
-                                                                newBankName);
-            */
-            
+            string modifiedSentence =
+                instance.SubstituteBankName(sampleSentence, newBankName);
+                        
             THEN( "Bank name should starts with 11, ends with 25 in the sample.")
             {
                 /* string's find method starts with 0 */
                 REQUIRE( get<0>(bankNamePos) == 12 - 1 );
                 REQUIRE( get<1>(bankNamePos) ==  26 - 1 );
             }
-            /*
             AND_THEN("Original bank name should be changed to new bank name in the sentence")
             {
-                REQUIRE( modifiedSampleSentence != sampleSentence );
-                REQUIRE( modifiedSampleSentence.find(newBankName) );
+                REQUIRE( modifiedSentence != sampleSentence );
+                REQUIRE( modifiedSentence.find(newBankName) );
             }
-             */
         }
     }
 }

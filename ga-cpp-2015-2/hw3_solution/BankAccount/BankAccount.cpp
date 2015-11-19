@@ -31,7 +31,6 @@ CBankAccount::CBankAccount(string bankName, int balances, double interestRate)
     CBankAccount::setInterestRate(interestRate);
 }
 
-
 /* set methods */
 void CBankAccount::setBankName(string bankName) {
     this->bankName = bankName;
@@ -77,6 +76,11 @@ int * CBankAccount::getPastBalances() {
     return this->pastBalances;
 }
 
+/* 
+ FindBankInSentence
+ It returns a tuple has the positions of Bank name.
+ First element : starts with, Second : ends with
+*/
 tuple<size_t, size_t> CBankAccount::FindBankInSentence(string sentence) {
     string token = "Bank";
     
@@ -87,4 +91,18 @@ tuple<size_t, size_t> CBankAccount::FindBankInSentence(string sentence) {
     size_t bankNameEndPos = bankNameStartPos + origninalBankNameLength;
     
     return make_tuple(bankNameStartPos, bankNameEndPos);
+}
+
+string CBankAccount::SubstituteBankName(string sentence, string newBankName) {
+    tuple<size_t, size_t> bankNamePos = this->FindBankInSentence(sentence);
+    size_t startPos = get<0>(bankNamePos);
+    size_t endPos = get<1>(bankNamePos);
+    
+    string substitutedSentence = sentence;
+    
+    substitutedSentence =
+    substitutedSentence.erase(startPos, endPos).insert(
+                                                       startPos,
+                                                       newBankName);
+    return substitutedSentence;
 }

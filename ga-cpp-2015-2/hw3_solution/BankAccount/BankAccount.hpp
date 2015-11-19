@@ -44,8 +44,9 @@ public:
     /* Fixed numbers of pastBalances */
     const int numOfPastBalances = 12;
     
-    
+    /* Bank name parsing & subsitute */
     tuple<size_t, size_t> FindBankInSentence(string sentence);
+    string SubstituteBankName(string sentence, string newBankName);
     
     /* Operator Overloadings */
     friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
