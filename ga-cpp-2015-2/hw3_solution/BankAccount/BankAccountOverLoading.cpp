@@ -51,13 +51,7 @@ const CBankAccount& CBankAccount::operator=(const CBankAccount &rhs) {
             delete [] pastBalances;
         }
         pastBalances = new int [rhs.numOfPastBalances];
-        pastBalances = rhs.pastBalances;
-        
-        /*
-        for(int nIndex=0 ; nIndex <m_nTimeSize ; nIndex++){
-            m_pnShowTime[nIndex] = rhs.m_pnShowTime[nIndex];
-        }
-        */
+        pastBalances = rhs.pastBalances;        
     }
     return *this;
 }
