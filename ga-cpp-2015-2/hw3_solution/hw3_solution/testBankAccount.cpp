@@ -348,21 +348,6 @@ SCENARIO( "Set bank name from user input", "[user input]" ) {
 }
 */
 
-int nTimeSize =(nMaxShowTime -720)/60 +1;// 상영시간의 개수 계산
-int **pTheatherSchedule =new int*[nTheater];//2차원 할당
-for(int nRow =0 ; nRow <nTheater ; nRow++)
-pTheatherSchedule[nRow] =new int[nTimeSize];//1차원 할당
-
-for(int nRow =0 ; nRow <nTheater ;nRow++)
-{
-    for(int nColumn =0 ; 720 +nColumn*60 <= nMaxShowTime ; nColumn++)
-    {
-        pTheatherSchedule[nRow][nColumn] = 720 +nColumn*60;
-        //	*(*(pTheatherSchedule) +nColumn) = 720 +nColumn*60;// 포인터연산은 포인터의 차원을 보기는 좋지만 가독성이 적어서 수정.
-        //	cout << *(*(pTheatherSchedule) +nColumn) << endl;
-    }
-}
-
 SCENARIO( "Test compound interest", "[compound interest]" ) {
     GIVEN( "Three CBankAccount instance exists, each instances have different interest rate" ) {
         double firstInterestRate = 0.1;
@@ -377,13 +362,49 @@ SCENARIO( "Test compound interest", "[compound interest]" ) {
         secondInstance.setInterestRate(secondInterestRate);
         thirdInstance.setInterestRate(thirdInterestRate);
         
-        WHEN( "Call setBankNameFromUserInput" ) {
-            instance.setBankNameFromUserInput(instance);
+        /* Configure how many years and accounts to be calculated */
+        const int forAfterYears = 5;
+        const int numOfAccounts = 3;
+        
+        WHEN( "Set Compount Interests data using CalCompoundInterest" ) {
+            
+            /* Memory allocation to contain data calculated */
+            double ** compoundInterestsBundle = new double * [forAfterYears];
+            for(int row = 0 ; row < forAfterYears ; row++) {
+                compoundInterestsBundle[row] = new double [numOfAccounts];
+            }
+            
+            /* For easy calculation when using for loop */
+            CBankAccount accountsBundle[numOfAccounts] =
+            {firstInstance, secondInstance, thirdInstance};
+            
+            /* Set Compount Interests data using CalCompoundInterest */
+            for(int row = 0 ; row < forAfterYears ;row++) {
+                for(int col = 0 ; col < numOfAccounts ; col++) {
+                    compoundInterestsBundle[row][col] = 1.1;
+//                        accountsBundle[col].CalCompoundInterest(row);
+                }
+            }
             
             THEN( "Return value should be equal to the expectedBankName")
             {
-                REQUIRE( instance.getBankName() == expectedBankName );
+                
             }
+
+            AND_WHEN( "Delete the allocated Memory" )
+            {
+                for(int row = 0 ; row < forAfterYears ;row++) {
+                    delete compoundInterestsBundle[row];
+                }
+
+                AND_THEN( "The Deallocated variable value should be deleted" )
+                {
+                    
+                }
+                
+            }
+
+            
         }
     }
 }

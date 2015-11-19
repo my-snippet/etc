@@ -113,3 +113,9 @@ string CBankAccount::SubstituteBankName(string sentence, string newBankName) {
                                                        newBankName);
     return substitutedSentence;
 }
+
+double CBankAccount::CalCompoundInterest(int afterYears) {    
+    double compountInterest;
+    
+    return compountInterest;
+}
