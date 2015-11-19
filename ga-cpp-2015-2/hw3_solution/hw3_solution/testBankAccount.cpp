@@ -175,7 +175,7 @@ SCENARIO( "Test setPastBalances", "[set]" ) {
         
         WHEN( "Apply past balances to instance" ) {
             instance.setPastBalances(samplePastBalances);
-            int * pastBalances = new int [instance.numOfPastBalances + 1];
+            const int * pastBalances = new int [instance.numOfPastBalances + 1];
             pastBalances = instance.getPastBalances();
             THEN( "instance's past balances should be equal to samplePastBalances")
             {

@@ -15,25 +15,26 @@
 using namespace std;
 //using namespace customNameSpace;
 
-CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs) {
+CBankAccount operator+(const CBankAccount& lhs, const CBankAccount& rhs) {
     
     /* Both bank name should be equal */
-    assert(lhs.getBankName() == rhs.getBankName());
+    assert(lhs.bankName == rhs.bankName);
     
     CBankAccount sumAccount(
-                            lhs.getBankName(),
-                            lhs.getBalances() + rhs.getBalances(),
-                            lhs.getInterestRate() + rhs.getInterestRate());
-
+                            lhs.bankName,
+                            lhs.balances + rhs.balances,
+                            lhs.interestRate + rhs.interestRate);
+    
     return sumAccount;
 }
 
-ostream& operator<<(ostream& out, CBankAccount& obj) {
-    out << "Bank name :" << obj.getBankName() << "\n";
-    out << "Balances :" << obj.getBalances() << "\n";
-    out << "InterestRate :" << obj.getInterestRate() << "\n";
+ostream& operator<<(ostream& out, const CBankAccount& obj) {
+
+    out << "Bank name :" << obj.bankName << "\n";
+    out << "Balances :" << obj.balances << "\n";
+    out << "InterestRate :" << obj.interestRate << "\n";
     
-    int * pasBalances = obj.getPastBalances();
+    int * pasBalances = obj.pastBalances;
     for(int i = 0 ; i < obj.numOfPastBalances ; i++) {
         out << "PastBalanced #" << i << " : " << pasBalances[i] << "\n";
     }

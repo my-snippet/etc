@@ -75,19 +75,19 @@ void CBankAccount::setBankNameFromUserInput() {
 
 
 /* Get methods */
-string CBankAccount::getBankName() {
+const string CBankAccount::getBankName() {
     return this->bankName;
 }
 
-int CBankAccount::getBalances() {
+const int CBankAccount::getBalances() {
     return this->balances;
 }
 
-double CBankAccount::getInterestRate() {
+const double CBankAccount::getInterestRate() {
     return this->interestRate;
 }
 
-int * CBankAccount::getPastBalances() {
+const int * CBankAccount::getPastBalances() {
     return this->pastBalances;
 }
 
