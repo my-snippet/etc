@@ -32,8 +32,32 @@ ostream& operator<<(ostream& out, CBankAccount obj) {
     out << "Bank name :" << obj.getBankName() << "\n";
     out << "Balances :" << obj.getBalances() << "\n";
     out << "InterestRate :" << obj.getInterestRate() << "\n";
-    for(int i=0 ; i < obj.getnumOfPastBalances() ; i++) {
+    for(int i=0 ; i < obj.numOfPastBalances ; i++) {
         out << "PastBalanced #" << i << " : " << obj.getPastBalances() << "\n";
     }
     return out;
+}
+
+const CBankAccount& CBankAccount::operator=(const CBankAccount &rhs) {
+    if(this == &rhs) {
+        return *this;
+    }
+    else {
+        bankName = rhs.bankName;
+        balances = rhs.balances;
+        interestRate = rhs.interestRate;
+        
+        if(pastBalances != NULL){
+            delete [] pastBalances;
+        }
+        pastBalances = new int [rhs.numOfPastBalances];
+        pastBalances = rhs.pastBalances;
+        
+        /*
+        for(int nIndex=0 ; nIndex <m_nTimeSize ; nIndex++){
+            m_pnShowTime[nIndex] = rhs.m_pnShowTime[nIndex];
+        }
+        */
+    }
+    return *this;
 }
