@@ -40,10 +40,17 @@ public:
     int getBalances();
     double getInterestRate();
     int * getPastBalances();
-    int getnumOfPastBalances();
     
+    /* Fixed numbers of pastBalances */
+    const int numOfPastBalances = 12;
+    
+    
+    tuple<size_t, size_t> FindBankInSentence(string sentence);
+    
+    /* Operator Overloadings */
     friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
     friend ostream& operator<<(ostream& out, CBankAccount& obj);
+    const CBankAccount& operator =(const CBankAccount &rhs);
 };
 
 

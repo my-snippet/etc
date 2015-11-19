@@ -15,6 +15,7 @@
 
 /* Built-in libraries */
 #include <array>
+#include <string>
 
 using namespace std;
 
@@ -166,19 +167,19 @@ SCENARIO( "Test setPastBalances", "[set]" ) {
     GIVEN( "Sample past balances exist" ) {
         CBankAccount instance;
         
-        int * samplePastBalances = new int [instance.getnumOfPastBalances() + 1];
-        for(int i ; i < instance.getnumOfPastBalances() ; i++) {
+        int * samplePastBalances = new int [instance.numOfPastBalances + 1];
+        for(int i ; i < instance.numOfPastBalances ; i++) {
             samplePastBalances[i] = i;
         }
         
         WHEN( "Apply past balances to instance" ) {
             instance.setPastBalances(samplePastBalances);
-            int * pastBalances = new int [instance.getnumOfPastBalances() + 1];
+            int * pastBalances = new int [instance.numOfPastBalances + 1];
             pastBalances = instance.getPastBalances();
             THEN( "instance's past balances should be equal to samplePastBalances")
             {
                 /* It's needed to refactor code, Use function (No Hard coding) */
-                for(int i=0 ; i < instance.getnumOfPastBalances() ; i++) {
+                for(int i=0 ; i < instance.numOfPastBalances ; i++) {
                     REQUIRE( pastBalances[i] == samplePastBalances[i] );
                 }
             }
@@ -186,14 +187,14 @@ SCENARIO( "Test setPastBalances", "[set]" ) {
     }
 }
 
-/* operator<< have some problems ( catch? or implementation? ) */
+/* operator<< has some problems ( catch? or implementation? ) */
 /*
 SCENARIO( "Test print PastBalances using operator<<", "[set]" ) {
     GIVEN( "Apply sample past balances to instance" ) {
         CBankAccount instance;
         
-        int * samplePastBalances = new int [instance.getnumOfPastBalances() + 1];
-        for(int i ; i < instance.getnumOfPastBalances() ; i++) {
+        int * samplePastBalances = new int [instance.numOfPastBalances + 1];
+        for(int i ; i < instance.numOfPastBalances ; i++) {
             samplePastBalances[i] = i;
         }
         instance.setPastBalances(samplePastBalances);
@@ -207,3 +208,137 @@ SCENARIO( "Test print PastBalances using operator<<", "[set]" ) {
     }
 }
 */
+
+SCENARIO( "Test CBankAccount operator=", "[operator]" ) {
+    GIVEN( "1. Initialze one bank data, 2. Set sample past balances to originalAccount" ) {
+        
+        /* a Bank data */
+        string firstAccountBankName = "foo Bank";
+        int firstAccountBalances = 123;
+        double firstAccountInterestRate = 1.23;
+        
+        /* Bank */
+        CBankAccount originalAccount(
+                                  firstAccountBankName,
+                                  firstAccountBalances,
+                                  firstAccountInterestRate);
+        CBankAccount copyAccount;
+        
+        /* Set sample past balances to originalAccount */
+        int * samplePastBalances = new int [copyAccount.numOfPastBalances + 1];
+        for(int i ; i < copyAccount.numOfPastBalances ; i++) {
+            samplePastBalances[i] = i;
+        }
+        originalAccount.setPastBalances(samplePastBalances);
+
+        
+        WHEN( "Copy account using operator=" ) {
+            copyAccount = originalAccount;
+            
+            THEN( "Sum account should be equal to the each sum of the partial value")
+            {
+                REQUIRE( copyAccount.getBankName() == originalAccount.getBankName() );
+                REQUIRE( copyAccount.getBalances() == originalAccount.getBalances() );
+                REQUIRE( copyAccount.getInterestRate() == originalAccount.getInterestRate() );
+                REQUIRE( copyAccount.getPastBalances() == originalAccount.getPastBalances() );
+            }
+        }
+    }
+}
+
+SCENARIO( "Test string replace,\
+         ( This replace implementation just parse starts with bank name to before ','\
+         If more exact parsing, it's needed to use vector objects, and NLP skills )",
+         "[string]" ) {
+    GIVEN( "1. Original bank name, New bank name, and Sample sentence exist" ) {
+        
+        string originalBankName = "Bank of America";
+        string newBankName = "Korean ExFchange Bank";
+        string sampleSentence =
+            "Welcome to Bank of America, the nation's leading financial institution and home for all of your personal financial needs";
+        
+        WHEN(
+             " In the sample sentence, \
+             1. Find bank name position, \
+             2. Change original bank name to new name in the sample sentence" ) {
+            
+            size_t bankNameStartPos = sampleSentence.find(originalBankName);
+            size_t origninalBankNameLength = (
+                                              sampleSentence.substr(bankNameStartPos)
+                                              ).find_last_of(",") - 1;
+            size_t bankNameEndPos = bankNameStartPos + origninalBankNameLength;
+            
+            string modifiedSampleSentence = sampleSentence;
+            modifiedSampleSentence =
+                modifiedSampleSentence.erase(
+                                             bankNameStartPos,
+                                             bankNameEndPos).insert(
+                                                                    bankNameStartPos,
+                                                                    newBankName);
+
+            THEN( "Bank name should starts with 11, ends with 25 in the sample.")
+            {
+                /* string's find method starts with 0 */
+                REQUIRE( bankNameStartPos == 12 - 1 );
+                REQUIRE( bankNameEndPos ==  26 - 1 );
+            }
+            AND_THEN("Original bank name should be changed to new bank name in the sentence")
+            {
+                REQUIRE( modifiedSampleSentence != sampleSentence );
+                REQUIRE( modifiedSampleSentence.find(newBankName) );
+            }
+        }
+    }
+}
+
+SCENARIO( "Test string replace using class methods", "[string], [method]" ) {
+    GIVEN( "1. Original bank name, New bank name, 2. Class instance exists" ) {
+        
+        string originalBankName = "Bank of America";
+        string newBankName = "Korean ExFchange Bank";
+        string sampleSentence =
+        "Welcome to Bank of America, the nation's leading financial institution and home for all of your personal financial needs";
+
+        
+        CBankAccount instance;
+        
+        WHEN(
+             " In the sample sentence, \
+             1. Find bank name position, \
+             2. Change original bank name to new name in the sample sentence\
+             USING METHODS" ) {
+            
+            tuple<size_t, size_t> bankNamePos = instance.FindBankInSentence(sampleSentence);
+            
+            /*
+            size_t origninalBankNameLength = (
+                                              sampleSentence.substr(bankNameStartPos)
+                                              ).find_last_of(",") - 1;
+            size_t bankNameEndPos = bankNameStartPos + origninalBankNameLength;
+            
+            
+            string modifiedSampleSentence = sampleSentence;
+            modifiedSampleSentence =
+            modifiedSampleSentence.erase(
+                                         bankNameStartPos,
+                                         bankNameEndPos).insert(
+                                                                bankNameStartPos,
+                                                                newBankName);
+            */
+            
+            THEN( "Bank name should starts with 11, ends with 25 in the sample.")
+            {
+                /* string's find method starts with 0 */
+                REQUIRE( get<0>(bankNamePos) == 12 - 1 );
+                REQUIRE( get<1>(bankNamePos) ==  26 - 1 );
+            }
+            /*
+            AND_THEN("Original bank name should be changed to new bank name in the sentence")
+            {
+                REQUIRE( modifiedSampleSentence != sampleSentence );
+                REQUIRE( modifiedSampleSentence.find(newBankName) );
+            }
+             */
+        }
+    }
+}

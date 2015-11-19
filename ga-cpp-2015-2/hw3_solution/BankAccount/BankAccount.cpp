@@ -51,12 +51,12 @@ void CBankAccount::setPastBalances(int * pastBalances) {
         delete this->pastBalances;
     }
     
-    this->pastBalances = new int[this->getnumOfPastBalances() + 1];
+    this->pastBalances = new int[this->numOfPastBalances + 1];
     assert(this->pastBalances != NULL);
     
     copy_n(
            pastBalances,
-           this->getnumOfPastBalances() ,
+           this->numOfPastBalances ,
            this->pastBalances);
 }
 
@@ -77,7 +77,14 @@ int * CBankAccount::getPastBalances() {
     return this->pastBalances;
 }
 
-int CBankAccount::getnumOfPastBalances() {
-    /* Fixed numbers of pastBalances */
-    return 12;
+tuple<size_t, size_t> CBankAccount::FindBankInSentence(string sentence) {
+    string token = "Bank";
+    
+    size_t bankNameStartPos = sentence.find(token);
+    size_t origninalBankNameLength = (
+                                      sentence.substr(bankNameStartPos)
+                                      ).find_last_of(",") - 1;
+    size_t bankNameEndPos = bankNameStartPos + origninalBankNameLength;
+    
+    return make_tuple(bankNameStartPos, bankNameEndPos);
 }
