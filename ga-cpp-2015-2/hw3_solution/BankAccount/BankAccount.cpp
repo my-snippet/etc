@@ -17,7 +17,12 @@ using namespace std;
 
 
 CBankAccount::CBankAccount()
-    : pastBalances(NULL) {
+    :
+    bankName(""),
+    balances(0),
+    interestRate(0.00),
+    pastBalances(NULL) {
+        
 }
 
 CBankAccount::~CBankAccount() {
