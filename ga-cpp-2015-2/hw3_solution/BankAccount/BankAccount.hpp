@@ -58,8 +58,8 @@ using namespace std;
         double CalCompoundValue(int afterYears);
         
         /* Operator Overloadings */
-        friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
-        friend ostream& operator<<(ostream& out, CBankAccount& obj);
+        friend CBankAccount operator+(const CBankAccount& lhs, const CBankAccount& rhs);
+        friend ostream& operator<<(ostream& out, const CBankAccount& obj);
         const CBankAccount& operator =(const CBankAccount &rhs);
     };
 //}
