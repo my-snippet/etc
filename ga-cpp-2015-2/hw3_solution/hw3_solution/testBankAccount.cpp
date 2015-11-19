@@ -347,3 +347,44 @@ SCENARIO( "Set bank name from user input", "[user input]" ) {
     }
 }
 */
+
+int nTimeSize =(nMaxShowTime -720)/60 +1;// 상영시간의 개수 계산
+int **pTheatherSchedule =new int*[nTheater];//2차원 할당
+for(int nRow =0 ; nRow <nTheater ; nRow++)
+pTheatherSchedule[nRow] =new int[nTimeSize];//1차원 할당
+
+for(int nRow =0 ; nRow <nTheater ;nRow++)
+{
+    for(int nColumn =0 ; 720 +nColumn*60 <= nMaxShowTime ; nColumn++)
+    {
+        pTheatherSchedule[nRow][nColumn] = 720 +nColumn*60;
+        //	*(*(pTheatherSchedule) +nColumn) = 720 +nColumn*60;// 포인터연산은 포인터의 차원을 보기는 좋지만 가독성이 적어서 수정.
+        //	cout << *(*(pTheatherSchedule) +nColumn) << endl;
+    }
+}
+
+SCENARIO( "Test compound interest", "[compound interest]" ) {
+    GIVEN( "Three CBankAccount instance exists, each instances have different interest rate" ) {
+        double firstInterestRate = 0.1;
+        double secondInterestRate = 0.2;
+        double thirdInterestRate = 0.4;
+        
+        CBankAccount firstInstance;
+        CBankAccount secondInstance;
+        CBankAccount thirdInstance;
+        
+        firstInstance.setInterestRate(firstInterestRate);
+        secondInstance.setInterestRate(secondInterestRate);
+        thirdInstance.setInterestRate(thirdInterestRate);
+        
+        WHEN( "Call setBankNameFromUserInput" ) {
+            instance.setBankNameFromUserInput(instance);
+            
+            THEN( "Return value should be equal to the expectedBankName")
+            {
+                REQUIRE( instance.getBankName() == expectedBankName );
+            }
+        }
+    }
+}
+
