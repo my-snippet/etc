@@ -350,51 +350,64 @@ SCENARIO( "Set bank name from user input", "[user input]" ) {
 
 SCENARIO( "Test compound interest", "[compound interest]" ) {
     GIVEN( "Three CBankAccount instance exists, each instances have different interest rate" ) {
-        double firstInterestRate = 0.1;
-        double secondInterestRate = 0.2;
-        double thirdInterestRate = 0.4;
-        
-        CBankAccount firstInstance;
-        CBankAccount secondInstance;
-        CBankAccount thirdInstance;
-        
-        firstInstance.setInterestRate(firstInterestRate);
-        secondInstance.setInterestRate(secondInterestRate);
-        thirdInstance.setInterestRate(thirdInterestRate);
         
         /* Configure how many years and accounts to be calculated */
         const int forAfterYears = 5;
         const int numOfAccounts = 3;
         
-        WHEN( "Set Compount Interests data using CalCompoundInterest" ) {
+        const string bankNameTable[numOfAccounts] = {"bank1", "bank2", "bank3"};
+        const double interestRateTable[numOfAccounts] = {0.01, 0.02, 0.04};
+        const int commonPrinciple = 100;
+        
+        CBankAccount firstInstance(
+                                   bankNameTable[0],
+                                   commonPrinciple,
+                                   interestRateTable[0]);
+        CBankAccount secondInstance(
+                                    bankNameTable[1],
+                                    commonPrinciple,
+                                    interestRateTable[1]);
+        CBankAccount thirdInstance(
+                                   bankNameTable[2],
+                                   commonPrinciple,
+                                   interestRateTable[2]);        
+        
+        WHEN( "Set Compount values data using CalCompoundValue" ) {
             
             /* Memory allocation to contain data calculated */
-            double ** compoundInterestsBundle = new double * [forAfterYears];
+            double ** compoundValueBundle = new double * [forAfterYears];
             for(int row = 0 ; row < forAfterYears ; row++) {
-                compoundInterestsBundle[row] = new double [numOfAccounts];
+                compoundValueBundle[row] = new double [numOfAccounts];
             }
             
             /* For easy calculation when using for loop */
             CBankAccount accountsBundle[numOfAccounts] =
             {firstInstance, secondInstance, thirdInstance};
             
-            /* Set Compount Interests data using CalCompoundInterest */
+            /* Set Compount values data using CalCompoundValue */
             for(int row = 0 ; row < forAfterYears ;row++) {
                 for(int col = 0 ; col < numOfAccounts ; col++) {
-                    compoundInterestsBundle[row][col] = 1.1;
-//                        accountsBundle[col].CalCompoundInterest(row);
+                    compoundValueBundle[row][col] =
+                        accountsBundle[col].CalCompoundValue(row);
                 }
             }
             
-            THEN( "Return value should be equal to the expectedBankName")
+            THEN( "Compound value should be equal to the Calculated Compound value")
             {
-                
+                for(int row = 0 ; row < forAfterYears ;row++) {
+                    for(int col = 0 ; col < numOfAccounts ; col++) {
+                        REQUIRE(
+                            compoundValueBundle[row][col] ==
+                                accountsBundle[col].getBalances() *
+                                pow(1 + accountsBundle[col].getInterestRate(), row) );
+                    }
+                }
             }
 
             AND_WHEN( "Delete the allocated Memory" )
             {
                 for(int row = 0 ; row < forAfterYears ;row++) {
-                    delete compoundInterestsBundle[row];
+                    delete compoundValueBundle[row];
                 }
 
                 AND_THEN( "The Deallocated variable value should be deleted" )

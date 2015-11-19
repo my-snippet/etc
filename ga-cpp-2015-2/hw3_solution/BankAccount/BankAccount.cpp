@@ -11,6 +11,7 @@
 /* Built-in libraries */
 #include <iostream>
 #include <cassert>
+#include<cmath>
 
 using namespace std;
 
@@ -114,8 +115,8 @@ string CBankAccount::SubstituteBankName(string sentence, string newBankName) {
     return substitutedSentence;
 }
 
-double CBankAccount::CalCompoundInterest(int afterYears) {    
-    double compountInterest;
-    
-    return compountInterest;
+double CBankAccount::CalCompoundValue(int afterYears) {
+    return
+        this->getBalances() *
+        pow(1 + this->getInterestRate(), afterYears);
 }

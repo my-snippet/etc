@@ -52,8 +52,8 @@ public:
     tuple<size_t, size_t> FindBankInSentence(string sentence);
     string SubstituteBankName(string sentence, string newBankName);
     
-    /* Calculate Compount Interest after years ( using the passed variable ) */
-    double CalCompoundInterest(int afterYears);
+    /* Calculate Compound value after years ( using the passed variable ) */
+    double CalCompoundValue(int afterYears);
     
     /* Operator Overloadings */
     friend CBankAccount operator+(CBankAccount& lhs, CBankAccount& rhs);
