@@ -43,3 +43,15 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 *.xcscheme
+
+
+# Python
+**/venv/
+.env
+
+**/compiled/
+**/img/
+**/.ipynb_checkpoints/
+**/__pycache__/
+*.pyc
+*.py.swp
