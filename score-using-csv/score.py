@@ -66,7 +66,7 @@ class ScoreUsingCSV():
             return comment
         return cut_in_marks_comment(comment)
 
-    def write_score_result(self, keys, comment_key="코멘트"):
+    def write_score_result(self, keys, comment_key='코멘트'):
         def write_from_score_table():
             def make_score_result_dicts():
                 score_line[comment_key] = self.make_score_comment(cut_in_marks)
@@ -88,10 +88,10 @@ class ScoreUsingCSV():
             score_points = self.get_score_points()
             write_from_score_table()
 
-    def send_email_from_result(self, comment_key="코멘트"):
+    def send_email_from_result(self, comment_key='코멘트'):
         with open(self.RESULT_TABLE_PATH, 'r') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 send_email(
                     row['코멘트'],
-                    [os.environ["DEFAULT_TO"], os.environ["DEFAULT_TO_2"], row['이메일']])
+                    [os.environ['DEFAULT_TO'], os.environ['DEFAULT_TO_2'], row['이메일']])
