@@ -5,9 +5,9 @@ import os
 from sendgrid_email import send_email
 
 
-SCORE_TABLE_PATH = 'data/sample-score-table.csv'
+SCORE_TABLE_PATH = 'data/confidential/score-table-1.csv'
 SCORE_POINTS_PATH = 'data/score-points.csv'
-RESULT_TABLE_PATH = 'data/result-table.csv'
+RESULT_TABLE_PATH = 'data/confidential/result-table-1.csv'
 PERFECT_SCORE = 9
 
 
@@ -41,7 +41,10 @@ class ScoreUsingCSV():
         return cut_in_marks
 
     def point_calculator(self, cut_in_marks):
-        return self.PERFECT_SCORE - sum(cut_in_marks.values())
+        point = self.PERFECT_SCORE - sum(cut_in_marks.values())
+        if point < 0:
+            point = 0
+        return point
 
     def make_score_comment(self, cut_in_marks):
         def point_comment():
@@ -65,15 +68,20 @@ class ScoreUsingCSV():
 
     def write_score_result(self, keys, comment_key="코멘트"):
         def write_from_score_table():
+            def make_score_result_dicts():
+                score_line[comment_key] = self.make_score_comment(cut_in_marks)
+                dicts = {}
+                for key in keys:
+                    dicts.update({key: score_line[key]})
+                return dicts
+
             with open(self.RESULT_TABLE_PATH, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=keys)
 
                 writer.writeheader()
                 for score_line in score_table:
                     cut_in_marks = self.signsToPoints(score_line, score_points)
-                    score_line[comment_key] = self.make_score_comment(cut_in_marks)
-                    for key in keys:
-                        writer.writerow({key: score_line[key]})       
+                    writer.writerow(make_score_result_dicts())
 
         with open(self.SCORE_TABLE_PATH, 'r') as csvfile:
             score_table = csv.DictReader(csvfile)
@@ -84,4 +92,6 @@ class ScoreUsingCSV():
         with open(self.RESULT_TABLE_PATH, 'r') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                send_email(row['코멘트'], [os.environ["DEFAULT_TO"], row['이메일']])
+                send_email(
+                    row['코멘트'],
+                    [os.environ["DEFAULT_TO"], os.environ["DEFAULT_TO_2"], row['이메일']])
