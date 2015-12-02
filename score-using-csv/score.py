@@ -39,17 +39,25 @@ class ScoreUsingCSV():
         return self.PERFECT_SCORE - sum(cut_in_marks.values())
 
     def make_score_comment(self, cut_in_marks):
-        point = self.point_calculator(cut_in_marks)
-        comment = ""
-        comment = comment + str(point) + "점입니다.\n\n"
-        comment = comment + "<사유>\n"
+        def point_comment(point):
+            return str(point) + "점입니다."
 
-        for key, value in cut_in_marks.items():
-            if value == 'o':
-                pass
-            comment = comment + "'" + str(key) + "'의 사유로" +\
-                str(value) + "점 감점\n"
-            print(comment)
+        def cut_in_marks_comment(comment):
+            comment = comment + "\n\n"
+            comment = comment + "<사유>\n"
+            for key, value in cut_in_marks.items():
+                if value == 'o':
+                    pass
+                comment = comment + "'" + str(key) + "'의 사유로" +\
+                    str(value) + "점 감점\n"
+            return comment
+
+        point = self.point_calculator(cut_in_marks)
+        comment = point_comment(point)
+        if point == self.PERFECT_SCORE:
+            return comment
+
+        return cut_in_marks_comment(comment)
 
     def score(self):
         with open(self.SCORE_TABLE_PATH, 'r') as csvfile:
@@ -57,4 +65,4 @@ class ScoreUsingCSV():
             score_points = self.get_score_points()
             for score_line in score_table:
                 cut_in_marks = self.signsToPoints(score_line, score_points)
-                self.make_score_comment(cut_in_marks)
+                print(self.make_score_comment(cut_in_marks))
