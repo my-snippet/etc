@@ -36,19 +36,25 @@ class ScoreUsingCSV():
         return cut_in_marks
 
     def point_calculator(self, cut_in_marks):
-        print(cut_in_marks.values())
         return self.PERFECT_SCORE - sum(cut_in_marks.values())
 
-    def make_score_comment(self, score_line):
-        for key, value in score_line.items():
+    def make_score_comment(self, cut_in_marks):
+        point = self.point_calculator(cut_in_marks)
+        comment = ""
+        comment = comment + str(point) + "점입니다.\n\n"
+        comment = comment + "<사유>\n"
+
+        for key, value in cut_in_marks.items():
             if value == 'o':
                 pass
-            print("사유 : '%s'의 사유로 %s점 감점" % (key, value))
+            comment = comment + "'" + str(key) + "'의 사유로" +\
+                str(value) + "점 감점\n"
+            print(comment)
 
     def score(self):
         with open(self.SCORE_TABLE_PATH, 'r') as csvfile:
             score_table = csv.DictReader(csvfile)
             score_points = self.get_score_points()
             for score_line in score_table:
-                print(self.point_calculator(score_line, score_points))
-                print(self.make_score_comment(score_line))
+                cut_in_marks = self.signsToPoints(score_line, score_points)
+                self.make_score_comment(cut_in_marks)
