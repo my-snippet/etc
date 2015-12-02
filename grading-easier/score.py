@@ -46,7 +46,10 @@ class ScoreUsingCSV():
             point = 0
         return point
 
-    def make_score_comment(self, cut_in_marks):
+    def make_score_comment(self, cut_in_marks, score_line):
+        def name_comment(name_key='이름'):
+            return "학생 이름 : " + score_line[name_key]
+
         def point_comment():
             return str(point) + "점입니다."
 
@@ -61,7 +64,10 @@ class ScoreUsingCSV():
             return comment
 
         point = self.point_calculator(cut_in_marks)
-        comment = point_comment()
+        comment = ""
+        comment = comment + name_comment()
+        comment = comment + "<br><br>"
+        comment = comment + point_comment()
         if point == self.PERFECT_SCORE:
             return comment
         return cut_in_marks_comment(comment)
@@ -69,7 +75,7 @@ class ScoreUsingCSV():
     def write_score_result(self, keys, comment_key='코멘트'):
         def write_from_score_table():
             def make_score_result_dicts():
-                score_line[comment_key] = self.make_score_comment(cut_in_marks)
+                score_line[comment_key] = self.make_score_comment(cut_in_marks, score_line)
                 dicts = {}
                 for key in keys:
                     dicts.update({key: score_line[key]})
