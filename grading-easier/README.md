@@ -14,5 +14,5 @@ Grading Easier
 Result image
 ===
 
-![alt tag](https://github.com/my-snippet/etc/blob/master/score-using-csv/data/images/score_result_mail.png)
+![alt tag](https://github.com/my-snippet/etc/blob/master/grading-easier/data/images/score_result_mail.png)
 
