@@ -24,5 +24,7 @@ class TestScoreUsingCSV(unittest.TestCase):
             for idx, score_line in enumerate(score_table, start=0):
                 self.assertEqual(
                     expected_scores[idx],
-                    self.score.point_calculator(score_line, score_points)
+                    self.score.point_calculator(
+                        self.score.signsToPoints(score_line, score_points)
+                    )
                 )
