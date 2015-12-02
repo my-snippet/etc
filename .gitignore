@@ -55,3 +55,4 @@ xcuserdata
 **/__pycache__/
 *.pyc
 *.py.swp
+*.swp
