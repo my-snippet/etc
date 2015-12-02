@@ -5,9 +5,9 @@ import os
 from sendgrid_email import send_email
 
 
-SCORE_TABLE_PATH = 'data/confidential/score-table-1.csv'
+SCORE_TABLE_PATH = 'data/confidential/score-table-2.csv'
 SCORE_POINTS_PATH = 'data/score-points.csv'
-RESULT_TABLE_PATH = 'data/confidential/result-table-1.csv'
+RESULT_TABLE_PATH = 'data/confidential/result-table-2.csv'
 PERFECT_SCORE = 9
 
 
