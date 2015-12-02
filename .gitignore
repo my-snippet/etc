@@ -56,6 +56,7 @@ xcuserdata
 *.pyc
 *.py.swp
 *.swp
+.cache/
 
 # Confidential
 confidential/
