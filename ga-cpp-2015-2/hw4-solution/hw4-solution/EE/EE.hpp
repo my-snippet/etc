@@ -20,15 +20,19 @@ using namespace std;
 class CEE : public CSSU
 {
 private:
-    string major;
+    string studentMajor;
     
 public:
     CEE();
     ~CEE();
     
     /* Set all values at once */
-    CEE(string studentName, string studentNumber, string major);
+    CEE(string studentName, string studentNumber, string studentMajor);
     
+    /* Get methods */
+//    string getStudentName();
+//    string getStudentNumber();
+    string getStudentMajor();
 };
 
 #endif /* EE_hpp */

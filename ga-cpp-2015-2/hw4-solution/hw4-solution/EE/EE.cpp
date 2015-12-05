@@ -18,3 +18,16 @@ CEE::CEE() {
 CEE::~CEE() {
     
 }
+
+/* Set all values at once */
+CEE::CEE(string studentName, string studentNumber, string studentMajor)
+    :
+    CSSU(studentName, studentNumber),
+    studentMajor(studentMajor) {
+        
+}
+
+/* Get methods */
+string CEE::getStudentMajor() {
+    return this->studentMajor;
+}

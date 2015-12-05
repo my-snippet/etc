@@ -37,14 +37,22 @@ SCENARIO( "Test constructor", "[constructor]" ) {
     GIVEN( "a student data" ) {
         string firstStudentName = "foo";
         string firstStudentNumber = "123456";
+        string firstStudentMajor = "Electorinc Engineering";
         
-        WHEN( "declare SSU with set values" ) {
-            CSSU firstStudent(firstStudentName, firstStudentNumber);
+        WHEN( "declare SSU, CEE with set values" ) {
+            CSSU ssuStudent(firstStudentName, firstStudentNumber);
+            CEE eeStudent(firstStudentName, firstStudentNumber, firstStudentMajor);
             
-            THEN( "its value can be accessed")
+            THEN( "CSSU instance value can be accessed")
             {
-                REQUIRE(firstStudent.getStudentName() == firstStudentName);
-                REQUIRE(firstStudent.getStudentNumber() == firstStudentNumber);
+                REQUIRE(ssuStudent.getStudentName() == firstStudentName);
+                REQUIRE(ssuStudent.getStudentNumber() == firstStudentNumber);
+                
+                AND_THEN("CEE instance value can be accessed") {
+                    REQUIRE(eeStudent.getStudentName() == firstStudentName);
+                    REQUIRE(eeStudent.getStudentNumber() == firstStudentNumber);
+                    REQUIRE(eeStudent.getStudentMajor() == firstStudentMajor);
+                }
             }
         }
     }

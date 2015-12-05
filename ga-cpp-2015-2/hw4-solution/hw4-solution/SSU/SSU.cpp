@@ -27,6 +27,14 @@ CSSU::CSSU(string studentName, string studentNumber)
     
 }
 
+/* Set methods */
+void CSSU::setStudentName(string studentName) {
+    this->studentName = studentName;
+}
+void CSSU::setStudentNumber(string studentNumber) {
+    this->studentNumber = studentNumber;
+}
+
 /* Get methods */
 string CSSU::getStudentName() {
     return this->studentName;

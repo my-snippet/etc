@@ -27,6 +27,10 @@ public:
     /* Set all values at once */
     CSSU(string studentName, string studentNumber);
     
+    /* Set methods */
+    void setStudentName(string studentName);
+    void setStudentNumber(string studentNumber);
+    
     /* Get methods */
     string getStudentName();
     string getStudentNumber();
