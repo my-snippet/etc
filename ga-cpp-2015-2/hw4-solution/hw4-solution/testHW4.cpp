@@ -119,3 +119,13 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
         }
     }
 }
+
+SCENARIO( "Test Random access IO", "[IO]" ) {
+
+    /*
+    1. Write instance data using random access IO.
+    2. Find the position of 5th instance data using get methods & string find
+    3. Modify the data as new data.
+    4. Test it is changed.
+     */
+}
