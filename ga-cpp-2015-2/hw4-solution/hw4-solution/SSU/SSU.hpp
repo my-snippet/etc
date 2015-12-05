@@ -27,6 +27,9 @@ public:
     /* Set all values at once */
     CSSU(string studentName, string studentNumber);
     
+    /* Get methods */
+    string getStudentName();
+    string getStudentNumber();
 };
 
 #endif /* SSU_hpp */

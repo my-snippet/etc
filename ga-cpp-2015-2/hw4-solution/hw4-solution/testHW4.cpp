@@ -33,3 +33,19 @@ SCENARIO( "Test sample (array object test example)", "[array]" ) {
     }
 }
 
+SCENARIO( "Test constructor", "[constructor]" ) {
+    GIVEN( "a student data" ) {
+        string firstStudentName = "foo";
+        string firstStudentNumber = "123456";
+        
+        WHEN( "declare SSU with set values" ) {
+            CSSU firstStudent(firstStudentName, firstStudentNumber);
+            
+            THEN( "its value can be accessed")
+            {
+                REQUIRE(firstStudent.getStudentName() == firstStudentName);
+                REQUIRE(firstStudent.getStudentNumber() == firstStudentNumber);
+            }
+        }
+    }
+}

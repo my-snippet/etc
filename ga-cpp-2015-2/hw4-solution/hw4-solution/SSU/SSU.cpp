@@ -19,8 +19,19 @@ CSSU::~CSSU() {
     
 }
 
-/*
-CSSU(string studentName, string studentNumber) {
+
+CSSU::CSSU(string studentName, string studentNumber)
+    :
+    studentName(studentName),
+    studentNumber(studentNumber) {
     
 }
-*/
+
+/* Get methods */
+string CSSU::getStudentName() {
+    return this->studentName;
+}
+
+string CSSU::getStudentNumber() {
+    return this->studentNumber;
+}
