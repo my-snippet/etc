@@ -15,6 +15,7 @@
 
 /* Built-in libraries */
 #include <array>
+#include <fstream>
 
 using namespace std;
 
@@ -35,23 +36,49 @@ SCENARIO( "Test sample (array object test example)", "[array]" ) {
 
 SCENARIO( "Test constructor", "[constructor]" ) {
     GIVEN( "a student data" ) {
-        string firstStudentName = "foo";
-        string firstStudentNumber = "123456";
-        string firstStudentMajor = "Electorinc Engineering";
+        string studentName = "foo";
+        string studentNumber = "123456";
+        string studentMajor = "Electorinc Engineering";
         
         WHEN( "declare SSU, CEE with set values" ) {
-            CSSU ssuStudent(firstStudentName, firstStudentNumber);
-            CEE eeStudent(firstStudentName, firstStudentNumber, firstStudentMajor);
+            CSSU ssuStudent(studentName, studentNumber);
+            CEE eeStudent(studentName, studentNumber, studentMajor);
             
             THEN( "CSSU instance value can be accessed")
             {
-                REQUIRE(ssuStudent.getStudentName() == firstStudentName);
-                REQUIRE(ssuStudent.getStudentNumber() == firstStudentNumber);
+                REQUIRE(ssuStudent.getStudentName() == studentName);
+                REQUIRE(ssuStudent.getStudentNumber() == studentNumber);
                 
                 AND_THEN("CEE instance value can be accessed") {
-                    REQUIRE(eeStudent.getStudentName() == firstStudentName);
-                    REQUIRE(eeStudent.getStudentNumber() == firstStudentNumber);
-                    REQUIRE(eeStudent.getStudentMajor() == firstStudentMajor);
+                    REQUIRE(eeStudent.getStudentName() == studentName);
+                    REQUIRE(eeStudent.getStudentNumber() == studentNumber);
+                    REQUIRE(eeStudent.getStudentMajor() == studentMajor);
+                }
+            }
+        }
+    }
+}
+
+SCENARIO( "Test basic file IO", "[IO]" ) {
+    GIVEN( "a student data" ) {
+        string studentName = "foo";
+        string studentNumber = "123456";
+        string studentMajor = "Electorinc Engineering";
+        
+        WHEN( "declare CEE array & set values" ) {
+            const int numOfStudent = 10;
+            CEE * eeStudents = new CEE [numOfStudent];
+            
+            for(int num=0; num<numOfStudent; num++) {
+                eeStudents[num].setStudentInfo(studentName + to_string(num),
+                                               studentNumber + to_string(num),
+                                               studentMajor + to_string(num));
+            }
+            
+            THEN( "CSSU instance value can be accessed")
+            {
+                AND_THEN("") {
+                    delete[] eeStudents;
                 }
             }
         }

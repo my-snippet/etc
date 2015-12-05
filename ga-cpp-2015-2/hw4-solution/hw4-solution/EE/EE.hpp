@@ -29,9 +29,11 @@ public:
     /* Set all values at once */
     CEE(string studentName, string studentNumber, string studentMajor);
     
+    /* Set methods */
+    void setStudentMajor(string studentMajor);
+    void setStudentInfo(string studentName, string studentNumber, string studentMajor);
+    
     /* Get methods */
-//    string getStudentName();
-//    string getStudentNumber();
     string getStudentMajor();
 };
 

@@ -27,6 +27,17 @@ CEE::CEE(string studentName, string studentNumber, string studentMajor)
         
 }
 
+/* Set methods */
+void CEE::setStudentMajor(string studentMajor) {
+    this->studentMajor = studentMajor;
+}
+
+void CEE::setStudentInfo(string studentName, string studentNumber, string studentMajor) {
+    setStudentName(studentName);
+    setStudentNumber(studentNumber);
+    setStudentMajor(studentMajor);
+}
+
 /* Get methods */
 string CEE::getStudentMajor() {
     return this->studentMajor;
