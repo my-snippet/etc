@@ -16,6 +16,7 @@
 /* Built-in libraries */
 #include <array>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -75,10 +76,44 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
                                                studentMajor + to_string(num));
             }
             
-            THEN( "CSSU instance value can be accessed")
-            {
-                AND_THEN("") {
-                    delete[] eeStudents;
+            AND_WHEN("Write instance(Student) data to a file") {
+                const string fileName = "sequencialIO.csv";
+                ofstream seqWriteIO (fileName);
+                
+                if (seqWriteIO.is_open()) {
+                    for(int num=0; num<numOfStudent; num++) {
+                        seqWriteIO <<
+                            eeStudents[num].getStudentName() << "," <<
+                            eeStudents[num].getStudentNumber() << "," <<
+                            eeStudents[num].getStudentMajor() << endl;
+                    }
+                    seqWriteIO.close();
+                } else {
+                    cout << "Unable to open file";
+                }
+                
+                THEN( "Read data & compare it to the original data")
+                {
+                    string readString;
+                    ifstream seqReadIO (fileName);
+                    
+                    if (seqReadIO.is_open()) {
+                        for(int num=0; num<numOfStudent; num++) {
+                            getline(seqReadIO, readString, ',');
+                            REQUIRE( readString == eeStudents[num].getStudentName());
+                            getline(seqReadIO, readString, ',');
+                            REQUIRE( readString == eeStudents[num].getStudentNumber());
+                            
+                            /* Last words delimiter is \n(new line) -> */
+                            getline(seqReadIO, readString);
+                            REQUIRE( readString == eeStudents[num].getStudentMajor());
+                        }
+                        seqReadIO.close();
+                    }
+                    
+                    AND_THEN("free dynamic data") {
+                        delete[] eeStudents;
+                    }
                 }
             }
         }
