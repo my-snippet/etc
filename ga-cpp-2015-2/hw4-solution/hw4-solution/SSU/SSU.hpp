@@ -9,4 +9,24 @@
 #ifndef SSU_hpp
 #define SSU_hpp
 
+/* Built-in libraries */
+#include <iostream>
+
+using namespace std;
+
+class CSSU
+{
+private:
+    string studentName;
+    string studentNumber;
+    
+public:
+    CSSU();
+    ~CSSU();
+
+    /* Set all values at once */
+    CSSU(string studentName, string studentNumber);
+    
+};
+
 #endif /* SSU_hpp */

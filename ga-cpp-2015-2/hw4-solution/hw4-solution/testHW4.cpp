@@ -18,7 +18,6 @@
 
 using namespace std;
 
-
 SCENARIO( "Test sample (array object test example)", "[array]" ) {
     GIVEN( "This stuff exists" ) {
         array<string, 2> input = {"abc", "def"};
