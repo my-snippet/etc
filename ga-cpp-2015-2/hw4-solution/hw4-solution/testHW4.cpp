@@ -85,7 +85,7 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
                         seqWriteIO <<
                             eeStudents[num].getStudentName() << "," <<
                             eeStudents[num].getStudentNumber() << "," <<
-                            eeStudents[num].getStudentMajor() << endl;
+                            eeStudents[num].getStudentMajor() << "," << endl;
                     }
                     seqWriteIO.close();
                 } else {
@@ -96,18 +96,25 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
                 {
                     string readString;
                     ifstream seqReadIO(fileName);
+                    stringstream seqReadLine;
+                    string token;
                     
                     if (seqReadIO.is_open()) {
-                        for(int num=0; num<numOfStudent; num++) {
-                            getline(seqReadIO, readString, ',');
-                            REQUIRE( readString == eeStudents[num].getStudentName());
-                            getline(seqReadIO, readString, ',');
-                            REQUIRE( readString == eeStudents[num].getStudentNumber());
-                            
-                            /* Last words delimiter is \n(new line) -> */
-                            getline(seqReadIO, readString);
-                            REQUIRE( readString == eeStudents[num].getStudentMajor());
-                        }
+                            int num = 0;
+                            while( getline(seqReadIO, readString) ) {
+                                seqReadLine << readString;
+                                getline(seqReadLine, token, ',');
+                                
+                                REQUIRE( token == eeStudents[num].getStudentName());
+                                
+                                getline(seqReadLine, token, ',');
+                                REQUIRE( token == eeStudents[num].getStudentNumber());
+                                
+                                getline(seqReadLine, token, ',');
+                                REQUIRE( token == eeStudents[num].getStudentMajor());
+                                
+                                num++;
+                            }
                         seqReadIO.close();
                     }
                     
@@ -134,9 +141,7 @@ SCENARIO( "Test Random access IO", "[IO]" ) {
         string studentNumber = "123456";
         string studentMajor = "Electorinc Engineering";
         
-        string newStudentName = "bar";
-        string newStudentNumber = "654321";
-        string newStudentMajor = "Computer Science";
+        string newStudentNumber = "654321000002929298383884";
         
         int targetInstanceNumber = 5;
         
@@ -159,7 +164,7 @@ SCENARIO( "Test Random access IO", "[IO]" ) {
                         seqWriteIO <<
                         eeStudents[num].getStudentName() << "," <<
                         eeStudents[num].getStudentNumber() << "," <<
-                        eeStudents[num].getStudentMajor() << endl;
+                        eeStudents[num].getStudentMajor() << "," << endl;
                     }
                     seqWriteIO.close();
                 } else {
@@ -168,14 +173,51 @@ SCENARIO( "Test Random access IO", "[IO]" ) {
                 
                 THEN( "Modify 5th instance data & Compare it to the original data")
                 {
-                    string readAllContents;
+                    string readString;
                     fstream afile(fileName);
                     
+                    string targetData = eeStudents[targetInstanceNumber-1].getStudentName();
+                    
+                    // set new data to the 5th instance
+                    eeStudents[targetInstanceNumber-1].setStudentNumber(newStudentNumber);
+                    
                     if (afile.is_open()) {
-                        getline(afile, readAllContents);
-                        cout << readAllContents << endl;
-                        getline(afile, readAllContents);
-                        cout << readAllContents << endl;
+                        long long pos = 0;
+                        long long targetDataPos = -1;
+                        
+                        // Hardcoded, It should be changed to a function
+                        while( getline(afile, readString, ',') ) {
+                            
+                            pos = afile.tellg();
+                            
+                            if(readString.find(targetData) != string::npos ) {
+                                //targetDataPos = pos;    // Backup target pos
+                                
+                                cout << readString << endl;
+                                
+                                // Backup the original remaining line
+                                getline(afile, readString, ',');
+                                getline(afile, readString);
+//                                cout << readString << endl;
+                                
+                                // Write new data & remaining line
+                                afile.seekg(targetDataPos);
+                                getline(afile, readString);
+                                //cout << readString << endl;
+                                /*
+                                afile
+                                    << eeStudents[targetInstanceNumber-1].getStudentNumber()
+                                    << readString
+                                    << endl;
+                                */
+                                break;
+                            }
+                        }
+                        
+                        afile.seekg(0);
+                        while( getline(afile, readString, ',') ) {
+                            //cout << readString << endl;
+                        }
                         
                         afile.close();
                     }
