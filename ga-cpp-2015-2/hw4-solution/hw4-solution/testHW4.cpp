@@ -78,16 +78,16 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
             
             AND_WHEN("Write instance(Student) data to a file") {
                 const string fileName = "sequencialIO.csv";
-                ofstream seqWriteIO(fileName);
+                ofstream wfile(fileName);
                 
-                if (seqWriteIO.is_open()) {
+                if (wfile.is_open()) {
                     for(int num=0; num<numOfStudent; num++) {
-                        seqWriteIO <<
+                        wfile <<
                             eeStudents[num].getStudentName() << "," <<
                             eeStudents[num].getStudentNumber() << "," <<
                             eeStudents[num].getStudentMajor() << "," << endl;
                     }
-                    seqWriteIO.close();
+                    wfile.close();
                 } else {
                     cout << "Unable to open file";
                 }
@@ -96,21 +96,21 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
                 {
                     string readString;
                     ifstream seqReadIO(fileName);
-                    stringstream seqReadLine;
+                    stringstream readLine;
                     string token;
                     
                     if (seqReadIO.is_open()) {
                             int num = 0;
                             while( getline(seqReadIO, readString) ) {
-                                seqReadLine << readString;
-                                getline(seqReadLine, token, ',');
+                                readLine << readString;
                                 
+                                getline(readLine, token, ',');
                                 REQUIRE( token == eeStudents[num].getStudentName());
                                 
-                                getline(seqReadLine, token, ',');
+                                getline(readLine, token, ',');
                                 REQUIRE( token == eeStudents[num].getStudentNumber());
                                 
-                                getline(seqReadLine, token, ',');
+                                getline(readLine, token, ',');
                                 REQUIRE( token == eeStudents[num].getStudentMajor());
                                 
                                 num++;
@@ -136,12 +136,21 @@ SCENARIO( "Test Random access IO", "[IO]" ) {
     4. Test it is changed.
      */
     
+    /*
+     This implementation is only allowable when both data size equal(old & new both),
+
+     If the data size different, implement differently
+     1. Copy all the remaining data,
+     2. When insert data, be careful if the old data still remain, 
+        or if the remaining data deleted. Use seekg carefully.
+     */
+    
     GIVEN( "a student data" ) {
         string studentName = "foo";
         string studentNumber = "123456";
         string studentMajor = "Electorinc Engineering";
         
-        string newStudentNumber = "654321000002929298383884";
+        string newStudentNumber = "0000000";
         
         int targetInstanceNumber = 5;
         
@@ -157,73 +166,94 @@ SCENARIO( "Test Random access IO", "[IO]" ) {
             
             AND_WHEN("Write instance(Student) data to a file") {
                 const string fileName = "sequencialIO.csv";
-                ofstream seqWriteIO(fileName);
+                ofstream wfile(fileName);
                 
-                if (seqWriteIO.is_open()) {
+                if (wfile.is_open()) {
                     for(int num=0; num<numOfStudent; num++) {
-                        seqWriteIO <<
+                        wfile <<
                         eeStudents[num].getStudentName() << "," <<
                         eeStudents[num].getStudentNumber() << "," <<
                         eeStudents[num].getStudentMajor() << "," << endl;
                     }
-                    seqWriteIO.close();
+                    wfile.close();
                 } else {
                     cout << "Unable to open file";
                 }
                 
-                THEN( "Modify 5th instance data & Compare it to the original data")
+                AND_WHEN( "Modify 5th instance data using random access")
                 {
                     string readString;
                     fstream afile(fileName);
+                    stringstream readLine;
+                    string token;
+                    long long targetDataPos = 0;
                     
-                    string targetData = eeStudents[targetInstanceNumber-1].getStudentName();
-                    
+                    // get old data from the 5th instance
+                    string targetData = eeStudents[targetInstanceNumber-1].getStudentNumber();
                     // set new data to the 5th instance
                     eeStudents[targetInstanceNumber-1].setStudentNumber(newStudentNumber);
                     
                     if (afile.is_open()) {
                         long long pos = 0;
-                        long long targetDataPos = -1;
+                        int num = 0;
                         
                         // Hardcoded, It should be changed to a function
-                        while( getline(afile, readString, ',') ) {
-                            
-                            pos = afile.tellg();
-                            
-                            if(readString.find(targetData) != string::npos ) {
-                                //targetDataPos = pos;    // Backup target pos
-                                
-                                cout << readString << endl;
-                                
-                                // Backup the original remaining line
-                                getline(afile, readString, ',');
-                                getline(afile, readString);
-//                                cout << readString << endl;
-                                
-                                // Write new data & remaining line
-                                afile.seekg(targetDataPos);
-                                getline(afile, readString);
-                                //cout << readString << endl;
-                                /*
-                                afile
-                                    << eeStudents[targetInstanceNumber-1].getStudentNumber()
-                                    << readString
-                                    << endl;
-                                */
-                                break;
-                            }
-                        }
-                        
-                        afile.seekg(0);
-                        while( getline(afile, readString, ',') ) {
+                        // and for loop -> while recommended, but it has some problem.
+                        while( getline(afile, readString) ) {
                             //cout << readString << endl;
+                            if( readString.find(targetData) != string::npos ) {
+                                readLine << readString;
+                                long long tokenPos = 0;
+                                
+                                while(getline(readLine, token, ',')) {
+                                    if(token == targetData) {
+                                        // Move file pointer to the target data( It's used when test )
+                                        targetDataPos = pos + tokenPos;
+                                        
+                                        
+                                        // Backup the original remaining data
+                                        string remainingData;
+                                        getline(readLine, remainingData);
+                                        
+                                        // Modify target data to new data
+                                        afile.seekg(targetDataPos);
+                                        afile << eeStudents[targetInstanceNumber-1].getStudentNumber();
+                                        afile.seekg(1, ios::cur);   // comma pass
+                                        afile << remainingData;
+                                        
+                                        afile.seekg(targetDataPos);
+                                        getline(afile, readString, ',');
+                                        
+                                        afile.seekg(targetDataPos);
+                                        
+                                        while( getline(afile, readString) ) {
+                                            cout << readString << endl;
+                                        }
+                                        
+                                        // To get out of the while loop
+                                        afile.seekg(0, ios::end);
+                                        break;
+                                    }
+                                    tokenPos = readLine.tellg();
+                                }
+                            }
+                            pos = afile.tellg();
                         }
-                        
-                        afile.close();
                     }
                     
-                    AND_THEN("free dynamic data") {
-                        delete[] eeStudents;
+                    THEN("Compare the file data to new data to check data is changed") {
+                        
+                        // Re-open because of the variable boundary
+                        fstream afile(fileName);
+                        afile.seekg(targetDataPos);
+                        getline(afile, readString, ',');
+                        
+                        REQUIRE(readString == eeStudents[targetInstanceNumber-1].getStudentNumber());
+                        
+                        AND_THEN("file close & free dynamic data") {
+                            delete[] eeStudents;
+                            afile.close();
+                        }
                     }
                 }
             }
