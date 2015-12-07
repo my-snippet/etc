@@ -78,7 +78,7 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
             
             AND_WHEN("Write instance(Student) data to a file") {
                 const string fileName = "sequencialIO.csv";
-                ofstream seqWriteIO (fileName);
+                ofstream seqWriteIO(fileName);
                 
                 if (seqWriteIO.is_open()) {
                     for(int num=0; num<numOfStudent; num++) {
@@ -95,7 +95,7 @@ SCENARIO( "Test basic file IO", "[IO]" ) {
                 THEN( "Read data & compare it to the original data")
                 {
                     string readString;
-                    ifstream seqReadIO (fileName);
+                    ifstream seqReadIO(fileName);
                     
                     if (seqReadIO.is_open()) {
                         for(int num=0; num<numOfStudent; num++) {
@@ -128,4 +128,63 @@ SCENARIO( "Test Random access IO", "[IO]" ) {
     3. Modify the data as new data.
     4. Test it is changed.
      */
+    
+    GIVEN( "a student data" ) {
+        string studentName = "foo";
+        string studentNumber = "123456";
+        string studentMajor = "Electorinc Engineering";
+        
+        string newStudentName = "bar";
+        string newStudentNumber = "654321";
+        string newStudentMajor = "Computer Science";
+        
+        int targetInstanceNumber = 5;
+        
+        WHEN( "declare CEE array & set values" ) {
+            const int numOfStudent = 7;
+            CEE * eeStudents = new CEE [numOfStudent];
+            
+            for(int num=0; num<numOfStudent; num++) {
+                eeStudents[num].setStudentInfo(studentName + to_string(num),
+                                               studentNumber + to_string(num),
+                                               studentMajor + to_string(num));
+            }
+            
+            AND_WHEN("Write instance(Student) data to a file") {
+                const string fileName = "sequencialIO.csv";
+                ofstream seqWriteIO(fileName);
+                
+                if (seqWriteIO.is_open()) {
+                    for(int num=0; num<numOfStudent; num++) {
+                        seqWriteIO <<
+                        eeStudents[num].getStudentName() << "," <<
+                        eeStudents[num].getStudentNumber() << "," <<
+                        eeStudents[num].getStudentMajor() << endl;
+                    }
+                    seqWriteIO.close();
+                } else {
+                    cout << "Unable to open file";
+                }
+                
+                THEN( "Modify 5th instance data & Compare it to the original data")
+                {
+                    string readAllContents;
+                    fstream afile(fileName);
+                    
+                    if (afile.is_open()) {
+                        getline(afile, readAllContents);
+                        cout << readAllContents << endl;
+                        getline(afile, readAllContents);
+                        cout << readAllContents << endl;
+                        
+                        afile.close();
+                    }
+                    
+                    AND_THEN("free dynamic data") {
+                        delete[] eeStudents;
+                    }
+                }
+            }
+        }
+    }
 }
