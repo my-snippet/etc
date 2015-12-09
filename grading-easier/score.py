@@ -5,10 +5,10 @@ import os
 from sendgrid_email import send_email
 
 
-SCORE_TABLE_PATH = 'data/confidential/score-table-2.csv'
-SCORE_POINTS_PATH = 'data/score-points.csv'
-RESULT_TABLE_PATH = 'data/confidential/result-table-2.csv'
-PERFECT_SCORE = 9
+SCORE_TABLE_PATH = os.environ['SCORE_TABLE_PATH']
+SCORE_POINTS_PATH = os.environ['SCORE_POINTS_PATH']
+RESULT_TABLE_PATH = os.environ['RESULT_TABLE_PATH']
+PERFECT_SCORE = int(os.environ['PERFECT_SCORE'])
 
 
 class ScoreUsingCSV():
@@ -31,10 +31,8 @@ class ScoreUsingCSV():
     def signsToPoints(self, score_line, score_points):
         cut_in_marks = {}
         for key in score_line.keys():
-            if score_line[key] == '2':
-                cut_in_marks[key] = 2
-            elif score_line[key] == '1':
-                cut_in_marks[key] = 1
+            if score_line[key] == self.PERFECT_SCORE:
+                cut_in_marks[key] = self.PERFECT_SCORE
             elif score_line[key] == 'x':
                 cut_in_marks[key] = int(score_points[key])
 
