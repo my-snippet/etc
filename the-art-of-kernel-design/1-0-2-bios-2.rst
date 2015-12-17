@@ -1,0 +1,11 @@
+BIOS loads OS. But what loads BIOS?
+
+1. Hardware executes BIOS. But how?
+
+-----
+
+Consideration
+
+----
+
+References
