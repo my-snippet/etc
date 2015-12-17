@@ -2,6 +2,10 @@ BIOS loads OS. But what loads BIOS?
 
 1. Hardware executes BIOS. But how?
 
+2. The moment it is turned on the power, a physical space will be conducted that contains a code for executing the BIOS.
+
+3. from 2, the space contains ...
+
 -----
 
 Consideration
