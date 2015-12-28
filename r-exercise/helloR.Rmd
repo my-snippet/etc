@@ -1,0 +1,16 @@
+---
+output: pdf_document
+---
+Hello, R
+
+```{r}
+2 ** 10
+2 ^ 10
+```
+
+
+```{r}
+x = seq(1,100)
+y = x^2
+plot(x,y)
+```
