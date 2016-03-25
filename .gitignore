@@ -61,6 +61,7 @@ xcuserdata
 # Twisted
 *.pid
 *.log
+*.cache
 
 # Confidential
 confidential/
