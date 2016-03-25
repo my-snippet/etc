@@ -58,6 +58,9 @@ xcuserdata
 *.swp
 .cache/
 
+# Twisted
+*.pid
+*.log
+
 # Confidential
 confidential/
-
