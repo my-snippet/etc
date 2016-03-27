@@ -2,7 +2,7 @@ from twisted.internet import reactor
 from twisted.enterprise import adbapi
 
 
-dbpool = adbapi.ConnectionPool("sqlite3", "users.db")
+dbpool = adbapi.ConnectionPool("sqlite3", "users.db", check_same_thread=False)
 
 def getName(email):
     return dbpool.runQuery("SELECT name FROM users WHERE email = ?", (email,))
