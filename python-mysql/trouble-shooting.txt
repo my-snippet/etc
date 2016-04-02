@@ -1,3 +1,13 @@
 # No requiring password when login
 http://serverfault.com/a/744840
 mysql_config_editor set --login-path=client --host=localhost --user=root --password
+
+
+# When executing example.py, make sure if the user table exsits,
+# if not, then create it like below.
+mysql> CREATE TABLE users(
+    -> id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    -> email VARCHAR(100) NOT NULL,
+    -> password VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY (id)
+    -> );
