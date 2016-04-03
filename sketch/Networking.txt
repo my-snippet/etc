@@ -1,0 +1,8 @@
+DNS Service
+관점에 따른 정의
+매핑: 도메인 이름과 실제 IP를 매핑
+컨텐츠 : 도메인 이름으로 쿼리 날리면 해당 주소의 컨텐츠를 반환
+네트워크 : 도메인 이름으로 쿼리 --> L2, L3 --> * Local DNS 서버 --> Root DNS --> IP 반환
+	* Local DNS : Root DNS 또는 더 상위의 Local DNS 서버의 위치(IP)를 제공
+	* 그렇다면 DNS의 중간 과정에서(예를 들면, 가짜 Local DNS) 정보를 교란할 수 있지 않을까?
+		-> 일종의 Man in the middle attack
