@@ -1,0 +1,4 @@
+1. over width 100%
+in layout1, two elements that make 100% width cause overflow, 
+that is, the same height elements could not be same height,
+-> 99% Ok, but 100% makes it
