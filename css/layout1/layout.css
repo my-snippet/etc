@@ -1,0 +1,32 @@
+.container {
+	position: relative;
+}
+
+.column {
+	display: inline-block;
+	vertical-align: top;
+	width: 79%;
+}
+
+nav {
+	display: inline-block;
+	vertical-align: top;
+	width: 20%;
+}
+
+section {
+	/* position is static by default */
+	margin-left: 200px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 40px;
+	background-color: white;
+	width: 100%;
+}
+body {
+	margin-bottom: 120px;
+}
