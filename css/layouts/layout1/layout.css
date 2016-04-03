@@ -11,7 +11,7 @@
 @media screen and (min-width:600px) {
   nav {
     float: left;
-    width: 25%;
+    width: 20%;
   }
   section {
     margin-left: 25%;
@@ -21,18 +21,6 @@
   nav li {
     display: inline;
   }
-}
-
-nav {
-  display: inline-block;
-  vertical-align: top;
-  width: 20%;
-}
-
-section {
-  /* position is static by default */
-  margin-left: 100px;
-  margin-right: 100px;
 }
 
 footer {
