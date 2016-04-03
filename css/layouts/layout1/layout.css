@@ -1,32 +1,48 @@
 .container {
-	position: relative;
+  position: relative;
 }
 
 .column {
-	display: inline-block;
-	vertical-align: top;
-	width: 79%;
+  display: inline-block;
+  vertical-align: top;
+  width: 79%;
+}
+
+@media screen and (min-width:600px) {
+  nav {
+    float: left;
+    width: 25%;
+  }
+  section {
+    margin-left: 25%;
+  }
+}
+@media screen and (max-width:599px) {
+  nav li {
+    display: inline;
+  }
 }
 
 nav {
-	display: inline-block;
-	vertical-align: top;
-	width: 20%;
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
 }
 
 section {
-	/* position is static by default */
-	margin-left: 200px;
+  /* position is static by default */
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	height: 40px;
-	background-color: white;
-	width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  background-color: white;
+  width: 100%;
 }
 body {
-	margin-bottom: 120px;
+  margin-bottom: 120px;
 }
