@@ -1,0 +1,13 @@
+body {
+	padding: 200px 0 0 175px;
+}
+h1 {
+	color: black;
+}
+h2 {
+	color: gray;
+}
+p {
+	font: normal 100%/1.5 Corbel, Helvetica, Arial, San-serif;
+	color: red;
+}
