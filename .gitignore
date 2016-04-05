@@ -66,3 +66,6 @@ xcuserdata
 
 # Confidential
 confidential/
+
+# css image files
+**/css3-visual-quickstart-guide/_images/
