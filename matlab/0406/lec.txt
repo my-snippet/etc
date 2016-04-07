@@ -1,0 +1,4 @@
+X(e^jw) = sum(x(n)*e^{-jw}) from - \infty to + \infty
+
+% .* : matrix multiplication
+% .^ : matrix exponential
