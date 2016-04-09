@@ -1,0 +1,11 @@
+- DNS fail : missing original URL Configuration
+I forgot that I had removed original URL(for some reason like test). So it remained only the aliasing of original URL
+aliasing만 해두고 본래 url에 ip설정을 지워버렸다는 것(어떤 이유로, 테스트 하려고 했던걸까?)이 안보였음
+
+- SSL fail
+Slight different cofiguration can cause the problem between 'SSL keys of www.$URL and $URL' and 'Redirect configurations in nginx'.
+www.$URL과 $URL의 ssl 키나 nginx 내에 리다이렉트 설정 사이에 미묘한 차이 때문에 트러블이 생길 수 있는 것 같다.
+
+SSL Reference
+https://dobest.io/gettings-started-with-jupyterhub/
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-14-04
