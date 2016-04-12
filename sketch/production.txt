@@ -12,3 +12,9 @@ https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-
 
 Apex Domain
 route53와 heroku 사이에 apex 도메인이 허용되지 않으니(ELB와 CloudFront를 연동하지 않는 이상), 일단은 subdomain을 둬서 불필요한 프로토콜 입력(www.같은)을 입력하지 않아도 되게 하자. 그리고 기본 www.DOMAIN.com 도메인이 정의되지 않았으므로 리다이렉트
+
+Route53(DNS Hosting service) -> Heroku 배포 -> Custom domain 연결까지
+1. Heroku app 생성(create) -> Git 연동 -> 플랫폼에서 지원하는 언어로 배포시 작동할 동작까지 설정
+2. Route53 -> CName으로 heroku domain redirect 설정
+3. Heroku app settings에서 custom domain 등록(하거나 cli로 추가)
++. SSH 지원하려면 SSL endpoint add-on으로 certification key랑 private key를 업로드 하면됨. (근데 유료. 20$/m)
