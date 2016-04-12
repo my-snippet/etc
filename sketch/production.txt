@@ -9,3 +9,6 @@ www.$URL과 $URL의 ssl 키나 nginx 내에 리다이렉트 설정 사이에 미
 SSL Reference
 https://dobest.io/gettings-started-with-jupyterhub/
 https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-14-04
+
+Apex Domain
+route53와 heroku 사이에 apex 도메인이 허용되지 않으니(ELB와 CloudFront를 연동하지 않는 이상), 일단은 subdomain을 둬서 불필요한 프로토콜 입력(www.같은)을 입력하지 않아도 되게 하자. 그리고 기본 www.DOMAIN.com 도메인이 정의되지 않았으므로 리다이렉트
