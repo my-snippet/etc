@@ -52,12 +52,10 @@ class HomePageTest(TestCase):
         Item.objects.create(text='itemey 1')
         Item.objects.create(text='itemey 2')
 
-        request = HttpRequest()
-        response = home_page(request)
+        response = self.client.get('/lists/the-only-list-in-the-world/') #1
 
-        self.assertIn('itemey 1', response.content.decode())
-        self.assertIn('itemey 2', response.content.decode())
-
+        self.assertContains(response, 'itemey 1') #2
+        self.assertContains(response, 'itemey 2') #3
 
 class ItemModelTest(TestCase):
 
