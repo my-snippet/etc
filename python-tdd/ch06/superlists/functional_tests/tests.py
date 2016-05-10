@@ -91,7 +91,7 @@ class NewVisitorTest(LiveServerTestCase):  #1
         # There is still a text box inviting her to add another item. She
         # enters "Use peacock feathers to make a fly" (Edith is very
         # methodical)
-        self.fail('Finish the test!')  #6
+        # self.fail('Finish the test!')  #6
 
         # She is invited to enter a to-do item straight away
         # [...rest of comments as before]
