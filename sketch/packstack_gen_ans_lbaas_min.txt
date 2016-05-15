@@ -1,0 +1,15 @@
+ans_file="ans-$(date +"%Y%m%d-%H:%M:%S").txt"
+nat_ip="10.0.2.15"
+all_in_one_ip="10.0.10.10"
+
+packstack --gen-answer-file $ans_file
+
+# Passwords set as "openstack"
+sed -i "s/CONFIG_DEFAULT_PASSWORD=.*/CONFIG_DEFAULT_PASSWORD=openstack/g" $ans_file
+sed -i "s/PW=.*/PW=openstack/g" $ans_file
+
+# IP configurations
+sed -i "s/$nat_ip/$all_in_one_ip/g" $ans_file
+
+# Enable LBass
+sed -i "s/CONFIG_LBAAS_INSTALL=n/CONFIG_LBAAS_INSTALL=y/g" $ans_file
