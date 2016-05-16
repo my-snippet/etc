@@ -5,7 +5,6 @@ ans_file="answer-lbaas-$(date +"%Y%m%d-%H:%M:%S").txt"
 # Answer file generation
 packstack --gen-answer=$ans_file \
 --keystone-admin-passwd="openstack" \
---mariadb-install=n \
 --nagios-install=n \
 --os-swift-install=n \
 --os-neutron-lbaas-install=y
