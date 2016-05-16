@@ -1,0 +1,10 @@
+all_in_one_ip="10.0.10.10"
+ans_file="answer-lbaas-$(date +"%Y%m%d-%H:%M:%S").txt"
+
+# Answer file generation
+packstack --gen-answer=$ans_file \
+--install-hosts=$all_in_one_ip \
+--keystone-admin-passwd="openstack" \
+--nagios-install=n \
+--os-swift-install=n \
+--os-neutron-lbaas-install=y
