@@ -1,0 +1,28 @@
+default_ip="10.0.2.15"
+all_in_one_ip="10.1.10.10"
+ans_file="answer-$(date +"%Y%m%d-%H:%M:%S").txt"
+
+packstack --gen-answer=$ans_file \
+--install-hosts "$all_in_one_ip" \
+--default-password="openstack" \
+--keystone-admin-passwd="openstack" \
+--nagios-install n \
+--os-horizon-install n \
+--os-swift-install n \
+--os-ceilometer-install n \
+--os-neutron-ml2-type-drivers vlan \
+--os-neutron-ml2-tenant-network-types vlan \
+--os-neutron-ml2-mechanism-drivers "linuxbridge" \
+--os-neutron-ml2-vlan-ranges "physnet2:30:40" \
+--os-neutron-lb-interface-mappings "physnet2:enp0s9" \
+--os-neutron-lbaas-install=y
+
+#------------------------------------------------------------------------------
+# Some option not working, therefore forced to change using below.
+
+# IP configurations( --install-hosts not working in kilo )
+sed -i "s/$default_ip/$all_in_one_ip/g" $ans_file
+
+# Network agents
+sed -i "s/CONFIG_NEUTRON_L2_AGENT=.*/CONFIG_NEUTRON_L2_AGENT=linuxbridge/g" $ans_file
+sed -i "s/CONFIG_NEUTRON_LB_INTERFACE_MAPPINGS=.*/CONFIG_NEUTRON_LB_INTERFACE_MAPPINGS=physnet2:enp0s9/g" $ans_file
