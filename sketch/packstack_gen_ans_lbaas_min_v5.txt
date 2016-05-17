@@ -1,0 +1,19 @@
+yum install -y centos-release-openstack-kilo && yum -y update &&  yum install -y openstack-packstack
+
+default_ip="10.0.2.15"
+all_in_one_ip="10.1.10.10"
+ans_file="answer-$(date +"%Y%m%d-%H:%M:%S").txt"
+
+# Answer file generation
+packstack --gen-answer=$ans_file \
+--default-password="openstack" \
+--keystone-admin-passwd="openstack" \
+--nagios-install=n \
+--os-swift-install=n \
+--os-ceilometer-install=n \
+--os-neutron-lbaas-install=y
+
+# IP configurations( Some options not working, therefore forced to change )
+sed -i "s/$default_ip/$all_in_one_ip/g" $ans_file
+
+packstack --answer-file "$ans_file"
