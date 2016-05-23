@@ -1,4 +1,7 @@
+from three import to_str
+
 import unittest
+
 
 class TestStringTypes(unittest.TestCase):
 
@@ -12,3 +15,7 @@ class TestStringTypes(unittest.TestCase):
     def test_setup_variable_type(self):
         self.assertTrue(isinstance(self.str_type, str))
         self.assertTrue(isinstance(self.bytes_type, bytes))
+
+    def test_bytes_to_str(self):
+        bytes_to_str = to_str(self.bytes_type)
+        self.assertTrue(isinstance(bytes_to_str, str))
