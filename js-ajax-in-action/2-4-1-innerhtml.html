@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <style>
+      .declared{
+        color: red;
+        font-family: arial;
+        font-weight: normal;
+        font-size: 16px;
+      }
+      .programmed{
+        color: blue;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+<body>
+<script>
+    function addNode(el,text) {
+      var childEl=document.createElement("div");
+      el.appendChild(childEl);
+      var txtNode=document.createTextNode(text);
+      childEl.appendChild(txtNode);
+    }
+    function addListItemUsingInnerHTML(el,text) {
+      el.innerHTML+="<div class='programmed'>"+text+"</div>";
+    }
+
+    window.onload=function() {
+      var hello=document.getElementById('hello');
+      hello.className='declared';
+    
+      var empty=document.getElementById('empty');
+      addListItemUsingInnerHTML(empty, "Wow innerHTML")
+
+      empty.style.border='solid green 2px';
+      empty.style.width="200px";
+    }
+  </script>
+
+  <p id='hello'>hello</p>
+  <div id='empty'></div>
+</body>
