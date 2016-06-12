@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <script>
+    </script>
+  </head>
+  <body>
+    <div id="popup" />
+    <script>
+      while(1) {
+        var text = prompt("Insert a text anything you want");
+        if (text != null && text != "") {
+          document.getElementById("popup").innerHTML =
+          "Your text<br />- " + text;
+          break;
+        }
+      }
+    </script>
+  </body>
+  </html>
