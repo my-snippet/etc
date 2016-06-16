@@ -1,0 +1,48 @@
+[1] 0.6910937
+
+	Pearson's product-moment correlation
+
+data:  possum$headL and possum$totalL
+t = 9.6569, df = 102, p-value = 4.441e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.5750415 0.7798823
+sample estimates:
+      cor 
+0.6910937 
+
+
+Call:
+lm(formula = possum$headL ~ possum$totalL)
+
+Coefficients:
+  (Intercept)  possum$totalL  
+      42.7098         0.5729  
+
+
+Call:
+lm(formula = possum$headL ~ possum$totalL)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.1877 -1.5340 -0.3345  1.2788  7.3968 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   42.70979    5.17281   8.257 5.66e-13 ***
+possum$totalL  0.57290    0.05933   9.657 4.68e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.595 on 102 degrees of freedom
+Multiple R-squared:  0.4776,	Adjusted R-squared:  0.4725 
+F-statistic: 93.26 on 1 and 102 DF,  p-value: 4.681e-16
+
+Analysis of Variance Table
+
+Response: possum$headL
+               Df Sum Sq Mean Sq F value    Pr(>F)    
+possum$totalL   1 628.15  628.15  93.257 4.681e-16 ***
+Residuals     102 687.04    6.74                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
