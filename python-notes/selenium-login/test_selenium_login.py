@@ -20,20 +20,14 @@ class TestSeleniumLogin(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_saint_login_id_selectors(self):
+    def test_saint_login_id_selector(self):
         self.assertTrue(
             self.browser.find_element_by_id('logonuidfield')
         )
 
-    def test_saint_login_password_selectors(self):
+    def test_saint_login_password_selector(self):
         self.assertTrue(
             self.browser.find_element_by_id('logonpassfield')
-        )
-
-    @unittest.skip("")
-    def test_saint_login_inputbox_selector(self):
-        self.assertTrue(
-            self.browser.find_element_by_name('login_submit')
         )
 
     def test_saint_login(self):
@@ -46,9 +40,7 @@ class TestSeleniumLogin(unittest.TestCase):
         session_text = self.browser.find_element_by_class_name("fontS02")
         self.assertIn("님 접속을 환영합니다.", session_text.text)
 
-
-    @unittest.skip("")
     def test_login(self):
-        self.assertTrue(
-            login(self.url, self.username, self.password)
-        )
+        browser = login(self.url, self.username, self.password)
+        session_text = browser.find_element_by_class_name("fontS02")
+        self.assertIn("님 접속을 환영합니다.", session_text.text)
