@@ -1,5 +1,7 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import sys
 
 
 def suffix_finder(dir_path, suffix):
@@ -23,3 +25,7 @@ def suffix_finder(dir_path, suffix):
         if f.endswith(suffix) and suffix.count('.') == f[1:].count('.'):
             result.append(dir_path + '/' + f)
     return result
+
+
+if __name__ == "__main__":
+    suffix_finder(sys.argv[1], sys.argv[2])
