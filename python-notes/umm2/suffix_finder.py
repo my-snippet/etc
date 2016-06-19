@@ -15,15 +15,17 @@ def suffix_finder(dir_path, suffix):
     확장자입니다.
 
     * 다만 첫 문자는 dot 파일일 수 있으니 제외하여 검사하기로 합니다.
-    * 그외 prefix로 점을 여러개 붙인 '..[file name]'와 같은 유형의 파일은 
+    * 그외 prefix로 점을 여러개 붙인 '..[file name]'와 같은 유형의 파일은
     고려하지 않았습니다.
     '''
     result = []
 
-    files = os.listdir(dir_path)
+    dir_abspath = os.path.abspath(dir_path)
+    files = os.listdir(dir_abspath)
     for f in files:
         if f.endswith(suffix) and suffix.count('.') == f[1:].count('.'):
-            result.append(dir_path + '/' + f)
+            result.append(dir_abspath + '/' + f)
+    print(result)
     return result
 
 
