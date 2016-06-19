@@ -1,4 +1,4 @@
-from replacer import replacer
+from replacer import replacer, replacer_f
 
 import unittest
 import os
@@ -28,9 +28,20 @@ class TestReplacer(unittest.TestCase):
         os.remove(self.file_name)
 
     def test_replacer_should_affects_only_from_and_to(self):
-        text = replacer(self.text, self.words[0], self.words[1])
+        from_ = self.words[0]
+        to = self.words[1]
+        text = replacer(self.text, from_, to)
 
-        self.assertEqual(text.count(self.words[0]), 0)
-        self.assertEqual(text.count(self.words[1]), self.each_word_num * 2)
+        self.assertEqual(text.count(from_), 0)
+        self.assertEqual(text.count(to), self.each_word_num * 2)
+        for i in range(2, self.kind_of_words):
+            self.assertEqual(text.count(self.words[i]), self.each_word_num)
+
+    def test_replacer_using_file_text(self):
+        from_ = self.words[0]
+        to = self.words[1]
+        text = replacer_f(self.file_name, from_, to)
+        self.assertEqual(text.count(from_), 0)
+        self.assertEqual(text.count(to), self.each_word_num * 2)
         for i in range(2, self.kind_of_words):
             self.assertEqual(text.count(self.words[i]), self.each_word_num)
