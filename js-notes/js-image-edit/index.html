@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Pure JS image edit</title>
+<script type="text/javascript" language="javascript">
+</script>
+</style>
+</head>
+<body>
+<div align="center">  
+   <div id="thumbnail">
+		<h3>Click on the image</h3>
+	    <a href="images/hills.jpg"><img src="images/thumbnails/hills-thumb.jpg" alt="hills" rel="Hills Image" /></a>
+		<a href="images/lilies.jpg"><img src="images/thumbnails/lilies-thumb.jpg" alt="lilies" rel="Lilies Image" /></a>
+		<a href="images/sunset.jpg"><img src="images/thumbnails/sunset-thumb.jpg" alt="sunset" rel="Sunset Image" /></a>
+		<a href="images/winter.jpg"><img src="images/thumbnails/winter-thumb.jpg" alt="winter" rel="Winter Image" /></a>
+		<p id="large"></p>
+   </div> 
+   <div id="large"></div>   
+<div id="background"></div>
+</div>
+
+<button onclick="numOfImg()">number of image?</button>
+<p id="demo"></p>
+
+<script>
+function numOfImg() {
+    var x = document.images.length;
+    document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html>
