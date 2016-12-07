@@ -64,7 +64,6 @@ def quick(a):
     
             # if l < r, a little bit annoying
             if(l <= r):
-                print(a[r], a[l])
                 tmp = a[r]
                 a[r] = a[l]
                 a[l] = tmp
@@ -86,10 +85,10 @@ def quick(a):
     return a
 
 #print(quick3([6,5,3,4]))
-#print(quick2([6,5,3,5,1]))
+print(quick([6,5,3,5,1]))
 #print(quicksort([6,3,5,4,6,8,8,3,3,2,1,1,3,6,7,2,6]))
-print(quick2([i for i in range(996)]))
-print(quick2([i for i in reversed(range(996))]))
+#print(quick2([i for i in range(996)]))
+#print(quick2([i for i in reversed(range(996))]))
 
 #print(quick3([i for i in reversed(range(10000))]))
 #quicksort([i for i in range(100000)])
