@@ -9,7 +9,7 @@
 <div align="center">  
    <div id="thumbnail">
 		<h3>Click on the image</h3>
-	    <a href="images/hills.jpg"><img src="images/thumbnails/hills-thumb.jpg" alt="hills" rel="Hills Image" /></a>
+	    <a href="images/hills.jpg"><img onclick="myFunction(event)" src="images/thumbnails/hills-thumb.jpg" alt="hills" rel="Hills Image" /></a>
 		<a href="images/lilies.jpg"><img src="images/thumbnails/lilies-thumb.jpg" alt="lilies" rel="Lilies Image" /></a>
 		<a href="images/sunset.jpg"><img src="images/thumbnails/sunset-thumb.jpg" alt="sunset" rel="Sunset Image" /></a>
 		<a href="images/winter.jpg"><img src="images/thumbnails/winter-thumb.jpg" alt="winter" rel="Winter Image" /></a>
@@ -24,9 +24,15 @@
 
 <script>
 function numOfImg() {
-    var x = document.images.length;
-    document.getElementById("demo").innerHTML = x;
+  var x = document.images.length;
+  document.getElementById("demo").innerHTML = x;
 }
+
+function myFunction(event) {
+  var x = event.target;
+  document.body.style.backgroundColor = "red";
+}
+
 </script>
 
 </body>
