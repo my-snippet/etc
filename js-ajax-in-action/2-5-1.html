@@ -1,0 +1,32 @@
+<html>
+<head>
+	<script type='text/javascript'>
+		window.onload=function(){
+			var iframe=document.getElementById('dataFeed');
+			var src='datafeeds/mydata.xml';
+			loadDataAsynchronously(iframe,src);
+		}
+		function loadDataAsynchronously(iframe,src){
+      //...do something amazing!!
+      console.log("dd");
+		}
+		function fetchData(){
+			var iframe=document.createElement('iframe');
+			iframe.className='hiddenDataFeed';
+			document.body.appendChild(iframe);
+			var src='datafeeds/mydata.xml';
+			loadDataAsynchronously(iframe,src);
+		}
+	</script>
+</head>
+<body>
+
+<iframe
+	id='dataFeed'
+	style='height:100px;width:100px;'
+>
+<script>fetchData()</script>
+
+</iframe>
+</body>
+</html>
